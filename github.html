@@ -1,4 +1,4 @@
-<!-- github.html (standalone experiment page, includes its own CSS and a small JS reveal) -->
+<!-- github.html (experiment page, includes its own CSS + advanced stanza slider) -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -18,16 +18,17 @@
         --muted:rgba(11,11,11,0.62);
         --hair:rgba(11,11,11,0.10);
         --soft:rgba(11,11,11,0.04);
+        --shadowA: 0 18px 55px rgba(0,0,0,0.06);
+        --shadowB: 0 10px 30px rgba(0,0,0,0.06);
         --radius:18px;
         --max:980px;
 
-        --s-1: 10px;
-        --s0: 14px;
+        --s0: 12px;
         --s1: 18px;
-        --s2: 24px;
-        --s3: 34px;
-        --s4: 48px;
-        --s5: 72px;
+        --s2: 26px;
+        --s3: 36px;
+        --s4: 54px;
+        --s5: 78px;
       }
 
       *{ box-sizing:border-box; }
@@ -37,21 +38,22 @@
         background:var(--bg);
         color:var(--fg);
         font-family:"Inconsolata", monospace;
-        line-height:1.75;
+        line-height:1.85;
         letter-spacing:0.01em;
       }
 
       .container{
         max-width:var(--max);
         margin:0 auto;
-        padding: 18px 18px 88px;
+        padding: 18px 18px 96px;
+        text-align: center;
       }
 
       /* Topbar */
       .topbar{
         position: sticky;
         top: 12px;
-        z-index: 50;
+        z-index: 60;
         display:flex;
         justify-content:center;
         padding: 0;
@@ -66,6 +68,7 @@
         background: rgba(255,255,255,0.86);
         backdrop-filter: blur(12px);
         border: 1px solid var(--hair);
+        box-shadow: var(--shadowB);
         display:flex;
         align-items:center;
         justify-content:space-between;
@@ -101,10 +104,9 @@
         border-color: var(--hair);
       }
 
-      /* Page header */
+      /* Hero */
       header.hero{
-        padding: var(--s5) 0 var(--s3);
-        text-align: center;
+        padding: var(--s5) 0 var(--s4);
       }
       .kicker{
         margin: 0;
@@ -124,25 +126,26 @@
         max-width: 76ch;
         color: var(--muted);
         font-size: 1.05rem;
-        line-height: 1.9;
+        line-height: 2.0;
       }
 
-      /* Sub header row */
+      /* Panels */
       .meta-row{
-        margin-top: var(--s3);
+        margin-top: var(--s4);
         display:grid;
         grid-template-columns: 1fr;
-        gap: 12px;
+        gap: 16px;
       }
-      @media (min-width: 820px){
-        .meta-row{ grid-template-columns: 1.2fr 0.8fr; gap: 16px; }
+      @media (min-width: 860px){
+        .meta-row{ grid-template-columns: 1.2fr 0.8fr; gap: 18px; }
       }
-
       .panel{
         border: 1px solid var(--hair);
         border-radius: var(--radius);
         background: #fff;
-        padding: 18px;
+        padding: 20px;
+        box-shadow: var(--shadowB);
+        text-align: center;
       }
       .panel h2{
         margin: 0;
@@ -151,14 +154,18 @@
         text-transform: uppercase;
       }
       .panel p{
-        margin: 12px 0 0;
+        margin: 14px 0 0;
         color: var(--muted);
+        max-width: 70ch;
+        margin-left:auto;
+        margin-right:auto;
       }
       .tags{
-        margin-top: 14px;
+        margin-top: 16px;
         display:flex;
         flex-wrap: wrap;
         gap: 10px;
+        justify-content: center;
       }
       .tag{
         font-size: 0.9rem;
@@ -170,17 +177,16 @@
         white-space: nowrap;
       }
 
-      /* Content blocks */
+      /* Sections */
       .section{
         margin-top: var(--s5);
       }
-
       .section-title{
         display:flex;
-        align-items: baseline;
-        justify-content: space-between;
-        gap: 12px;
-        padding-bottom: 10px;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        padding-bottom: 14px;
         border-bottom: 1px solid var(--hair);
       }
       .section-title h2{
@@ -192,30 +198,33 @@
       .section-title .small{
         color: var(--muted);
         font-size: 0.92rem;
-        white-space: nowrap;
+        max-width: 80ch;
+        line-height: 1.9;
       }
 
+      /* Notes grid */
       .grid{
-        margin-top: var(--s2);
+        margin-top: var(--s3);
         display:grid;
         grid-template-columns: 1fr;
-        gap: 14px;
+        gap: 18px;
       }
-      @media (min-width: 820px){
-        .grid{ grid-template-columns: 1fr 1fr; gap: 16px; }
+      @media (min-width: 860px){
+        .grid{ grid-template-columns: 1fr 1fr; gap: 18px; }
       }
-
       .card{
-        border: 1px solid var(--hair);
         border-radius: var(--radius);
         background: #fff;
-        padding: 18px;
+        padding: 20px;
+        box-shadow: var(--shadowA);
+        border: 1px solid rgba(11,11,11,0.06);
         transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+        text-align: center;
       }
       .card:hover{
         transform: translateY(-2px);
-        box-shadow: 0 18px 55px rgba(0,0,0,0.06);
-        border-color: rgba(11,11,11,0.18);
+        box-shadow: 0 22px 70px rgba(0,0,0,0.08);
+        border-color: rgba(11,11,11,0.12);
       }
       .card h3{
         margin: 0;
@@ -223,27 +232,123 @@
         letter-spacing: -0.01em;
       }
       .card p{
-        margin: 10px 0 0;
+        margin: 12px 0 0;
         color: var(--muted);
+        max-width: 66ch;
+        margin-left:auto;
+        margin-right:auto;
       }
 
-      /* Quote block */
-      blockquote{
-        margin: 0;
-        padding: 18px 18px;
+      /* Poem player */
+      .player-wrap{
+        margin-top: var(--s3);
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+      @media (min-width: 860px){
+        .player-wrap{ grid-template-columns: 1fr 0.95fr; align-items: start; gap: 18px; }
+      }
+
+      .player{
         border-radius: var(--radius);
+        background: #fff;
+        box-shadow: var(--shadowA);
+        border: 1px solid rgba(11,11,11,0.06);
+        padding: 20px;
+        text-align: center;
+      }
+
+      .player-top{
+        display:flex;
+        flex-direction: column;
+        gap: 12px;
+        align-items: center;
+      }
+
+      .row{
+        display:flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+      }
+
+      .btn{
+        appearance: none;
         border: 1px solid var(--hair);
         background: #fff;
+        color: var(--fg);
+        border-radius: 999px;
+        padding: 10px 12px;
+        font: inherit;
+        font-size: 0.92rem;
+        cursor: pointer;
+        transition: transform 160ms ease, background 160ms ease, border-color 160ms ease;
       }
-      blockquote p{
-        margin: 0;
-        font-size: 1.02rem;
-        line-height: 1.9;
+      .btn:hover{
+        transform: translateY(-1px);
+        background: rgba(11,11,11,0.03);
+        border-color: rgba(11,11,11,0.16);
       }
-      .quote-meta{
-        margin-top: 12px;
+      .btn.primary{
+        background: rgba(11,11,11,0.04);
+      }
+
+      .statline{
         color: var(--muted);
         font-size: 0.92rem;
+      }
+
+      .range{
+        width: min(520px, 100%);
+        accent-color: var(--fg);
+      }
+
+      .quote{
+        border-radius: var(--radius);
+        background: #fff;
+        box-shadow: var(--shadowA);
+        border: 1px solid rgba(11,11,11,0.06);
+        padding: 22px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .quote-inner{
+        opacity: 1;
+        transform: translateY(0);
+        transition: opacity 220ms ease, transform 220ms ease;
+      }
+      .quote.is-switching .quote-inner{
+        opacity: 0;
+        transform: translateY(6px);
+      }
+
+      blockquote{
+        margin: 0;
+      }
+      .stanza{
+        margin: 0;
+        font-size: 1.04rem;
+        line-height: 2.0;
+        white-space: pre-line;
+      }
+      .quote-meta{
+        margin-top: 14px;
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      .kbd{
+        display:inline-block;
+        padding: 2px 8px;
+        border: 1px solid var(--hair);
+        border-bottom-color: rgba(11,11,11,0.18);
+        border-radius: 8px;
+        background: #fff;
+        color: var(--fg);
+        font-size: 0.9rem;
       }
 
       /* Subtle reveal */
@@ -259,7 +364,7 @@
 
       footer{
         margin-top: var(--s5);
-        padding-top: var(--s2);
+        padding-top: var(--s3);
         border-top: 1px solid var(--hair);
         text-align:center;
         color: rgba(11,11,11,0.55);
@@ -270,7 +375,8 @@
         html{ scroll-behavior:auto; }
         .reveal{ opacity: 1; transform: none; transition: none; }
         .card{ transition: none; }
-        .card:hover{ transform:none; box-shadow:none; }
+        .card:hover{ transform:none; box-shadow: var(--shadowA); }
+        .quote-inner{ transition: none; }
       }
     </style>
   </head>
@@ -282,7 +388,7 @@
         <nav class="nav">
           <a class="pill" href="index.html#projects">Back to Projects</a>
           <a class="pill" href="#notes">Notes</a>
-          <a class="pill" href="#excerpt">Excerpt</a>
+          <a class="pill" href="#poem">Poem</a>
         </nav>
       </div>
     </div>
@@ -292,35 +398,35 @@
         <p class="kicker">Project</p>
         <h1>GitHub Ongoing</h1>
         <p class="lead">
-          A public learning trail focused on shipping, documentation, and clean iteration.
-          Minimal on purpose. Precise where it matters.
+          Clean commits. Readable repos. Short feedback loops.
+          This page is a controlled playground for spacing, hierarchy, and interaction.
         </p>
 
         <div class="meta-row">
           <div class="panel reveal">
-            <h2>Working style</h2>
+            <h2>Intent</h2>
             <p>
-              Small commits. Clear messages. Readme first. One improvement at a time.
-              The goal is not noise. The goal is signal.
+              Minimal surface. High signal. The design should feel calm and expensive.
+              Effects exist to support reading and navigation.
             </p>
             <div class="tags" aria-label="Tags">
-              <span class="tag">Documentation</span>
-              <span class="tag">Iteration</span>
-              <span class="tag">Clarity</span>
-              <span class="tag">Shipping</span>
+              <span class="tag">Monochrome</span>
+              <span class="tag">Spacing</span>
+              <span class="tag">Motion</span>
+              <span class="tag">Performance</span>
             </div>
           </div>
 
           <div class="panel reveal">
-            <h2>Now</h2>
+            <h2>Interaction</h2>
             <p>
-              This page is an experiment in layout, rhythm, and restraint.
-              It stays monochrome and intentionally calm.
+              A stanza slider below. Keyboard support included.
+              State is saved, because good tools remember.
             </p>
             <div class="tags">
-              <span class="tag">Black and white</span>
-              <span class="tag">Spacing</span>
-              <span class="tag">Minimal UI</span>
+              <span class="tag">Range slider</span>
+              <span class="tag">Keyboard</span>
+              <span class="tag">Local storage</span>
             </div>
           </div>
         </div>
@@ -329,22 +435,25 @@
       <section id="notes" class="section">
         <div class="section-title reveal">
           <h2>Notes</h2>
-          <div class="small">Clean structure. Few elements. Strong hierarchy.</div>
+          <div class="small">
+            Centered layout, bigger spacing, and the shadow language you liked.
+            Hover is quiet. Content is readable on mobile.
+          </div>
         </div>
 
         <div class="grid">
           <article class="card reveal">
             <h3>What this signals</h3>
             <p>
-              Ability to structure work, keep a repository readable, and make progress visible.
-              Less spectacle. More intent.
+              Structure, consistency, and the ability to ship without drama.
+              It reads quickly and still feels deliberate.
             </p>
           </article>
 
           <article class="card reveal">
             <h3>What happens next</h3>
             <p>
-              This becomes a hub for repositories, changelogs, and short build notes.
+              This becomes a hub for repositories, changelogs, and small build notes.
               Each update should be understandable in under a minute.
             </p>
           </article>
@@ -360,34 +469,66 @@
           <article class="card reveal">
             <h3>Implementation detail</h3>
             <p>
-              Subtle reveals use IntersectionObserver. No heavy libraries.
+              IntersectionObserver for reveals. No heavy libraries.
               Motion respects reduced motion preferences.
             </p>
           </article>
         </div>
       </section>
 
-      <section id="excerpt" class="section">
+      <section id="poem" class="section">
         <div class="section-title reveal">
-          <h2>Excerpt placeholder</h2>
-          <div class="small">Schiller, Die Glocke</div>
+          <h2>Die Glocke</h2>
+          <div class="small">
+            Interactive stanza slider. Use <span class="kbd">←</span> and <span class="kbd">→</span>.
+            Press <span class="kbd">R</span> for random. Press <span class="kbd">Space</span> for autoplay.
+          </div>
         </div>
 
-        <div style="margin-top: 24px" class="reveal">
-          <blockquote>
-            <p>
-              Fest gemauert in der Erden<br />
-              Steht die Form, aus Lehm gebrannt.<br />
-              Heute soll die Glocke werden.<br />
-              Frisch, Gesellen, seid zur Hand.
-            </p>
-            <div class="quote-meta">Friedrich Schiller, Die Glocke. Placeholder text for layout testing.</div>
-          </blockquote>
+        <div class="player-wrap">
+          <div class="player reveal" aria-label="Poem controls">
+            <div class="player-top">
+              <div class="statline" id="stanzaLabel">Stanza 1 of 1</div>
+
+              <input
+                class="range"
+                id="stanzaRange"
+                type="range"
+                min="0"
+                max="0"
+                step="1"
+                value="0"
+                aria-label="Stanza slider"
+              />
+
+              <div class="row">
+                <button class="btn" id="prevBtn" type="button">Prev</button>
+                <button class="btn primary" id="nextBtn" type="button">Next</button>
+                <button class="btn" id="randomBtn" type="button">Random</button>
+              </div>
+
+              <div class="row">
+                <button class="btn" id="playBtn" type="button" aria-pressed="false">Autoplay</button>
+                <button class="btn" id="copyBtn" type="button">Copy stanza</button>
+              </div>
+
+              <div class="statline" id="statusLine" aria-live="polite"></div>
+            </div>
+          </div>
+
+          <div class="quote reveal" aria-label="Poem excerpt">
+            <div class="quote-inner" id="quoteInner">
+              <blockquote>
+                <p class="stanza" id="stanzaText"></p>
+                <div class="quote-meta" id="stanzaMeta"></div>
+              </blockquote>
+            </div>
+          </div>
         </div>
       </section>
 
       <footer>
-        GitHub Ongoing. Built for clarity, not decoration.
+        GitHub Ongoing. This page is a prototype. Clean, calm, readable.
       </footer>
     </main>
 
@@ -407,6 +548,211 @@
           { threshold: 0.12 }
         );
         els.forEach((el) => io.observe(el));
+      })();
+
+      (function () {
+        const STOR_KEY = "github_poem_stanza_index_v1";
+        const STOR_PLAY = "github_poem_autoplay_v1";
+
+        const stanzas = [
+          {
+            title: "Die Glocke",
+            lines:
+`Fest gemauert in der Erden
+Steht die Form, aus Lehm gebrannt.
+Heute soll die Glocke werden,
+Frisch, Gesellen, seid zur Hand.`,
+            meta: "Friedrich Schiller, Die Glocke"
+          },
+          {
+            title: "Die Glocke",
+            lines:
+`Von der Stirne heiß
+Rinnen muß der Schweiß,
+Soll das Werk den Meister loben;
+Doch der Segen kommt von oben.`,
+            meta: "Friedrich Schiller, Die Glocke"
+          },
+          {
+            title: "Die Glocke",
+            lines:
+`Zum Werke, das wir ernst bereiten,
+Geziemt sich wohl ein ernstes Wort;
+Wenn gute Reden sie begleiten,
+Dann fließt die Arbeit munter fort.`,
+            meta: "Friedrich Schiller, Die Glocke"
+          },
+          {
+            title: "Die Glocke",
+            lines:
+`So laßt uns jetzt mit Fleiß betrachten,
+Was durch die schwache Kraft entspringt,
+Den schlechten Mann muß man verachten,
+Der nie bedacht, was er vollbringt.`,
+            meta: "Friedrich Schiller, Die Glocke"
+          },
+          {
+            title: "Die Glocke",
+            lines:
+`Das ist's ja, was den Menschen zieret,
+Und dazu ward ihm der Verstand,
+Daß er im Innern Herzen spüret,
+Was er erschafft mit seiner Hand.`,
+            meta: "Friedrich Schiller, Die Glocke"
+          },
+          {
+            title: "Die Glocke",
+            lines:
+`Drum prüfe, wer sich ewig bindet,
+Ob sich das Herz zum Herzen findet;
+Der Wahn ist kurz, die Reu ist lang.`,
+            meta: "Friedrich Schiller, Die Glocke"
+          }
+        ];
+
+        const range = document.getElementById("stanzaRange");
+        const text = document.getElementById("stanzaText");
+        const meta = document.getElementById("stanzaMeta");
+        const label = document.getElementById("stanzaLabel");
+        const status = document.getElementById("statusLine");
+
+        const prevBtn = document.getElementById("prevBtn");
+        const nextBtn = document.getElementById("nextBtn");
+        const randomBtn = document.getElementById("randomBtn");
+        const playBtn = document.getElementById("playBtn");
+        const copyBtn = document.getElementById("copyBtn");
+
+        const quoteInner = document.getElementById("quoteInner");
+        const quoteBox = quoteInner ? quoteInner.closest(".quote") : null;
+
+        let idx = 0;
+        let timer = null;
+        let isPlaying = false;
+
+        function clamp(n, a, b){ return Math.max(a, Math.min(b, n)); }
+
+        function loadState(){
+          const saved = Number(localStorage.getItem(STOR_KEY));
+          if (!Number.isNaN(saved)) idx = clamp(saved, 0, stanzas.length - 1);
+
+          const play = localStorage.getItem(STOR_PLAY);
+          isPlaying = play === "1";
+        }
+
+        function saveState(){
+          localStorage.setItem(STOR_KEY, String(idx));
+          localStorage.setItem(STOR_PLAY, isPlaying ? "1" : "0");
+        }
+
+        function setSwitching(on){
+          if (!quoteBox) return;
+          if (on) quoteBox.classList.add("is-switching");
+          else quoteBox.classList.remove("is-switching");
+        }
+
+        function render(soft){
+          const s = stanzas[idx];
+          label.textContent = `Stanza ${idx + 1} of ${stanzas.length}`;
+          range.value = String(idx);
+
+          if (!soft){
+            text.textContent = s.lines;
+            meta.textContent = s.meta;
+            return;
+          }
+
+          setSwitching(true);
+          window.setTimeout(() => {
+            text.textContent = s.lines;
+            meta.textContent = s.meta;
+            setSwitching(false);
+          }, 170);
+        }
+
+        function setIndex(next, soft){
+          idx = clamp(next, 0, stanzas.length - 1);
+          saveState();
+          render(soft);
+        }
+
+        function stop(){
+          isPlaying = false;
+          playBtn.setAttribute("aria-pressed", "false");
+          playBtn.textContent = "Autoplay";
+          if (timer) window.clearInterval(timer);
+          timer = null;
+          saveState();
+        }
+
+        function start(){
+          isPlaying = true;
+          playBtn.setAttribute("aria-pressed", "true");
+          playBtn.textContent = "Autoplay on";
+          if (timer) window.clearInterval(timer);
+          timer = window.setInterval(() => {
+            const next = (idx + 1) % stanzas.length;
+            setIndex(next, true);
+          }, 2400);
+          saveState();
+        }
+
+        function togglePlay(){
+          if (isPlaying) stop();
+          else start();
+        }
+
+        async function copyCurrent(){
+          const s = stanzas[idx];
+          const payload = `${s.lines}\n\n${s.meta}`;
+          try{
+            await navigator.clipboard.writeText(payload);
+            status.textContent = "Copied.";
+            window.setTimeout(() => (status.textContent = ""), 1200);
+          }catch{
+            status.textContent = "Copy blocked by browser.";
+            window.setTimeout(() => (status.textContent = ""), 1800);
+          }
+        }
+
+        function random(){
+          if (stanzas.length <= 1) return;
+          let n = idx;
+          while (n === idx) n = Math.floor(Math.random() * stanzas.length);
+          setIndex(n, true);
+        }
+
+        range.max = String(stanzas.length - 1);
+
+        loadState();
+        render(false);
+
+        if (isPlaying) start();
+        else stop();
+
+        range.addEventListener("input", () => {
+          setIndex(Number(range.value), true);
+        });
+
+        prevBtn.addEventListener("click", () => setIndex(idx - 1, true));
+        nextBtn.addEventListener("click", () => setIndex(idx + 1, true));
+        randomBtn.addEventListener("click", () => random());
+        playBtn.addEventListener("click", () => togglePlay());
+        copyBtn.addEventListener("click", () => copyCurrent());
+
+        window.addEventListener("keydown", (e) => {
+          const tag = (e.target && e.target.tagName) ? e.target.tagName.toLowerCase() : "";
+          if (tag === "input" || tag === "textarea") return;
+
+          if (e.key === "ArrowLeft") setIndex(idx - 1, true);
+          if (e.key === "ArrowRight") setIndex(idx + 1, true);
+
+          if (e.key === "r" || e.key === "R") random();
+
+          if (e.key === " ") {
+            e.preventDefault();
+            togglePlay();
+          }
+        });
       })();
     </script>
   </body>
