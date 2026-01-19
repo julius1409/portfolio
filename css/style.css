@@ -5,7 +5,12 @@
   --shadow:0 18px 60px rgba(0,0,0,0.08);
   --shadow2:0 10px 30px rgba(0,0,0,0.06);
   --radius:18px;
+
+  /* Page width defaults */
   --max:980px;
+
+  /* NEW: toolbar width defaults */
+  --navmax: var(--max);
 }
 
 *{box-sizing:border-box;}
@@ -18,8 +23,14 @@ body{
 }
 
 /* page sizing */
-body.page-index{ --max:1180px; }
-body.page-detail{ --max:980px; }
+body.page-index{
+  --max:1180px;     /* index content stays wide */
+  --navmax:980px;   /* NEW: toolbar stays like detail pages */
+}
+body.page-detail{
+  --max:980px;
+  --navmax:980px;
+}
 
 /* container */
 .container{
@@ -28,7 +39,7 @@ body.page-detail{ --max:980px; }
   padding:22px 18px 96px;
 }
 
-/* topbar (fixed to match container on ALL pages incl. index) */
+/* topbar (width controlled by --navmax now) */
 .topbar{
   position:sticky;
   top:12px;
@@ -36,12 +47,12 @@ body.page-detail{ --max:980px; }
   display:flex;
   justify-content:center;
   margin:12px 0 18px;
-  padding:0;              /* changed */
+  padding:0;
 }
 .topbar-inner{
   width:100%;
-  max-width:var(--max);
-  margin:0 18px;          /* changed: matches container side padding */
+  max-width:var(--navmax); /* CHANGED: was var(--max) */
+  margin:0 18px;           /* aligns with container padding */
   display:flex;
   align-items:center;
   justify-content:space-between;
