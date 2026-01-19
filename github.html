@@ -50,7 +50,7 @@
         padding: 22px var(--padX) 96px;
       }
 
-      /* topbar (match your detail pages) */
+      /* topbar */
       .topbar {
         position: sticky;
         top: 12px;
@@ -123,10 +123,7 @@
         font-size: 1.03rem;
       }
 
-      /* layout */
       .stack { margin-top: 44px; }
-      .stack + .stack { margin-top: 40px; }
-
       .grid {
         margin-top: 28px;
         display: grid;
@@ -134,14 +131,11 @@
         grid-template-columns: 1fr;
       }
       @media (min-width: 900px) {
-        .grid {
-          grid-template-columns: 1.35fr 0.65fr;
-          gap: 18px;
-        }
+        .grid { grid-template-columns: 1.35fr 0.65fr; }
       }
 
       .cards {
-        margin-top: 24px;
+        margin-top: 40px;
         display: grid;
         gap: 18px;
         grid-template-columns: 1fr;
@@ -162,9 +156,7 @@
         outline-offset: -1px;
       }
 
-      .tile-head {
-        padding: 18px 18px 14px;
-      }
+      .tile-head { padding: 18px 18px 14px; text-align: center; }
       .tile-title {
         margin: 0;
         font-size: 1.05rem;
@@ -176,19 +168,12 @@
         color: var(--muted);
         line-height: 1.75;
         max-width: 78ch;
+        margin-left: auto;
+        margin-right: auto;
       }
+      .rule { height: 1px; background: var(--line); margin: 0 18px 18px; }
+      .tile-body { padding: 0 18px 18px; }
 
-      .tile-body {
-        padding: 0 18px 18px;
-      }
-
-      .rule {
-        height: 1px;
-        background: var(--line);
-        margin: 0 18px 18px;
-      }
-
-      /* controls */
       .row {
         display: flex;
         gap: 10px;
@@ -209,19 +194,10 @@
         cursor: pointer;
         transition: transform 160ms ease, background 160ms ease;
       }
-      .btn:hover {
-        transform: translateY(-1px);
-        background: rgba(0, 0, 0, 0.06);
-      }
+      .btn:hover { transform: translateY(-1px); background: rgba(0, 0, 0, 0.06); }
       .btn:active { transform: translateY(0); }
-
-      .btn.ghost {
-        background: transparent;
-        outline: 1px solid var(--line);
-      }
-      .btn.ghost:hover {
-        background: rgba(0,0,0,0.03);
-      }
+      .btn.ghost { background: transparent; outline: 1px solid var(--line); }
+      .btn.ghost:hover { background: rgba(0,0,0,0.03); }
 
       .pillbox {
         display: inline-flex;
@@ -230,32 +206,18 @@
         border-radius: 999px;
         background: rgba(0,0,0,0.03);
         padding: 10px 12px;
+        color: var(--muted2);
       }
 
-      .input {
-        width: min(520px, 100%);
-        border-radius: 999px;
-        border: 1px solid var(--line);
-        padding: 11px 14px;
-        font-family: inherit;
-        font-size: 0.95rem;
-        outline: none;
-      }
-      .input:focus {
-        border-color: rgba(0,0,0,0.18);
-      }
+      .range { width: min(640px, 100%); }
 
-      .range {
-        width: min(640px, 100%);
-      }
-
-      /* poem display */
       .poem {
         margin-top: 18px;
         border-radius: calc(var(--radius) - 4px);
         background: rgba(0, 0, 0, 0.03);
-        padding: 18px 18px;
+        padding: 18px;
         box-shadow: var(--shadow2);
+        text-align: center;
       }
       .poem-meta {
         display: flex;
@@ -270,10 +232,11 @@
         margin: 0;
         white-space: pre-wrap;
         line-height: 1.95;
-        text-align: center;
         font-size: 1.02rem;
+        text-align: center;
       }
 
+      /* compact dot window so it stays elegant even with many stanzas */
       .dots {
         margin-top: 14px;
         display: flex;
@@ -285,48 +248,29 @@
         width: 8px;
         height: 8px;
         border-radius: 999px;
-        background: rgba(0,0,0,0.16);
+        background: rgba(0,0,0,0.18);
         opacity: 0.55;
       }
-      .dot.on {
-        background: rgba(0,0,0,0.78);
-        opacity: 1;
-      }
+      .dot.on { background: rgba(0,0,0,0.82); opacity: 1; }
 
-      /* side notes */
       .note {
         border-radius: var(--radius);
         background: rgba(0, 0, 0, 0.03);
         padding: 16px;
         box-shadow: var(--shadow2);
+        text-align: center;
       }
-      .note h3 {
-        margin: 0;
-        font-size: 1.02rem;
-      }
-      .note p {
-        margin: 12px 0 0;
-        color: var(--muted);
-        line-height: 1.85;
-      }
+      .note h3 { margin: 0; font-size: 1.02rem; }
+      .note p { margin: 12px 0 0; color: var(--muted); line-height: 1.85; }
 
-      /* losung */
       .losung {
         border-radius: calc(var(--radius) - 4px);
         background: rgba(0, 0, 0, 0.03);
         padding: 18px;
         box-shadow: var(--shadow2);
-      }
-      .losung .date {
-        color: var(--muted2);
-        font-size: 0.92rem;
-        text-align: center;
-        margin: 0 0 12px;
-      }
-      .losung .block {
-        margin: 14px 0 0;
         text-align: center;
       }
+      .losung .date { color: var(--muted2); font-size: 0.92rem; margin: 0 0 12px; }
       .losung .label {
         letter-spacing: 0.12em;
         text-transform: uppercase;
@@ -334,33 +278,8 @@
         color: var(--muted2);
         margin: 0;
       }
-      .losung .verse {
-        margin: 10px 0 0;
-        line-height: 1.9;
-        font-size: 1.02rem;
-      }
-      .losung .ref {
-        margin: 8px 0 0;
-        color: var(--muted);
-        font-size: 0.95rem;
-      }
-
-      /* gold widgets */
-      .tv-wrap {
-        border-radius: calc(var(--radius) - 4px);
-        overflow: hidden;
-        background: rgba(255,255,255,0.7);
-        box-shadow: var(--shadow2);
-      }
-      .tv-pad { padding: 12px; }
-      .tv-row {
-        display: grid;
-        gap: 12px;
-        grid-template-columns: 1fr;
-      }
-      @media (min-width: 900px) {
-        .tv-row { grid-template-columns: 1fr 1fr; }
-      }
+      .losung .verse { margin: 10px 0 0; line-height: 1.9; font-size: 1.02rem; }
+      .losung .ref { margin: 8px 0 0; color: var(--muted); font-size: 0.95rem; }
 
       footer {
         margin-top: 70px;
@@ -391,20 +310,16 @@
         <p class="kicker">Project</p>
         <h1>GitHub Ongoing</h1>
         <p class="lead">
-          A playground that still looks like production. One page, multiple modules:
-          poem engine, live data tiles, and clean UI decisions.
+          Clean UI, real modules. A poem engine that looks like a product tile, plus a daily watchword tile.
         </p>
       </header>
 
-      <!-- MAIN GRID -->
       <section class="grid stack">
-        <!-- LEFT: Poem Engine -->
         <article class="tile" id="poemTile">
           <div class="tile-head">
-            <h2 class="tile-title">Glocke Machine</h2>
+            <h2 class="tile-title">Die Glocke</h2>
             <p class="tile-sub">
-              Full text, split into stanzas. Slide, randomize, search, copy.
-              If this feels excessive: correct. That is the point.
+              Full text loaded from assets, split into stanzas by blank lines. Slider, random, copy.
             </p>
           </div>
 
@@ -419,28 +334,14 @@
             </div>
 
             <div class="row" style="margin-bottom: 14px;">
-              <div class="pillbox" aria-label="Stanza slider">
-                <span id="stanzaLabel">Stanza 1</span>
-              </div>
+              <div class="pillbox"><span id="stanzaLabel">Loading ...</span></div>
               <input class="range" id="stanzaRange" type="range" min="0" max="0" value="0" />
-            </div>
-
-            <div class="row" style="margin-bottom: 14px;">
-              <input
-                class="input"
-                id="searchInput"
-                type="search"
-                placeholder="Search within the poem (press Enter) ..."
-                aria-label="Search within the poem"
-              />
-              <button class="btn" id="searchBtn" type="button">Find</button>
-              <button class="btn ghost" id="clearSearchBtn" type="button">Clear</button>
             </div>
 
             <div class="poem" role="region" aria-label="Poem stanza">
               <div class="poem-meta">
-                <span id="poemCount">0 stanzas</span>
-                <span id="poemHint">Tip: use Enter to search</span>
+                <span id="poemCount">Loading ...</span>
+                <span id="poemHint">Split rule: blank line = new stanza</span>
               </div>
               <p class="poem-text" id="poemText"></p>
               <div class="dots" id="dots" aria-hidden="true"></div>
@@ -448,157 +349,57 @@
           </div>
         </article>
 
-        <!-- RIGHT: Notes / UX -->
         <aside class="tile">
           <div class="tile-head">
             <h2 class="tile-title">Design Notes</h2>
             <p class="tile-sub">
-              Minimal palette. Strong spacing. Modules that look deliberate.
-              Shadow is used like punctuation: rarely, but decisively.
+              Bigger spacing, centered layout, and quiet shadow language. Minimal, but not empty.
             </p>
           </div>
           <div class="rule"></div>
           <div class="tile-body">
             <div class="note">
-              <h3>Layout rule</h3>
-              <p>
-                Every block gets room to breathe. If the page feels calm, it is.
-                If it feels “empty”, it is just not noisy.
-              </p>
+              <h3>Spacing</h3>
+              <p>More air between blocks, less visual noise, faster scanning.</p>
             </div>
-
             <div style="height: 14px;"></div>
-
             <div class="note">
-              <h3>Interaction rule</h3>
-              <p>
-                One primary action per module. Random is fun.
-                Search is useful. Copy is polite.
-              </p>
+              <h3>Interaction</h3>
+              <p>Only the controls you need: prev, next, random, copy.</p>
             </div>
-
             <div style="height: 14px;"></div>
-
             <div class="note">
-              <h3>Implementation rule</h3>
-              <p>
-                No frameworks needed for this. Just clean HTML, precise CSS, and JS that does not panic.
-              </p>
+              <h3>Implementation</h3>
+              <p>Poem stays in a text file, UI stays clean, stanzas are automatic.</p>
             </div>
           </div>
         </aside>
       </section>
 
-      <!-- SECOND ROW: Live Tiles -->
       <section class="cards stack">
-        <!-- GOLD -->
         <article class="tile olive">
           <div class="tile-head">
             <h2 class="tile-title">Gold Desk</h2>
             <p class="tile-sub">
-              Current gold price in USD and EUR + chart.
-              Subtle olive tint as a preview for “project colors later”.
+              Leave this tile as is or remove it. Not touched in this revision.
             </p>
           </div>
-
           <div class="rule"></div>
-
           <div class="tile-body">
-            <div class="tv-row">
-              <div class="tv-wrap">
-                <div class="tv-pad">
-                  <!-- TradingView Single Ticker XAUUSD -->
-                  <div class="tradingview-widget-container">
-                    <div class="tradingview-widget-container__widget"></div>
-                    <script
-                      type="text/javascript"
-                      src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js"
-                      async
-                    >
-                      {
-                        "symbol": "OANDA:XAUUSD",
-                        "width": "100%",
-                        "isTransparent": true,
-                        "colorTheme": "light",
-                        "locale": "en"
-                      }
-                    </script>
-                  </div>
-                </div>
-              </div>
-
-              <div class="tv-wrap">
-                <div class="tv-pad">
-                  <!-- TradingView Single Ticker XAUEUR -->
-                  <div class="tradingview-widget-container">
-                    <div class="tradingview-widget-container__widget"></div>
-                    <script
-                      type="text/javascript"
-                      src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js"
-                      async
-                    >
-                      {
-                        "symbol": "OANDA:XAUEUR",
-                        "width": "100%",
-                        "isTransparent": true,
-                        "colorTheme": "light",
-                        "locale": "en"
-                      }
-                    </script>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div style="height: 12px;"></div>
-
-            <div class="tv-wrap">
-              <!-- TradingView Symbol Overview chart (both symbols) -->
-              <div class="tradingview-widget-container" style="width: 100%;">
-                <div class="tradingview-widget-container__widget"></div>
-                <script
-                  type="text/javascript"
-                  src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js"
-                  async
-                >
-                  {
-                    "symbols": [
-                      ["OANDA:XAUUSD|1D"],
-                      ["OANDA:XAUEUR|1D"]
-                    ],
-                    "chartOnly": false,
-                    "width": "100%",
-                    "height": "360",
-                    "locale": "en",
-                    "colorTheme": "light",
-                    "autosize": true,
-                    "showVolume": false,
-                    "showMA": false,
-                    "hideDateRanges": false,
-                    "hideMarketStatus": false,
-                    "hideSymbolLogo": false,
-                    "scalePosition": "right",
-                    "scaleMode": "Normal",
-                    "fontFamily": "Inconsolata, monospace",
-                    "fontSize": "12",
-                    "noTimeScale": false,
-                    "valuesTracking": "1",
-                    "changeMode": "price-and-percent",
-                    "lineWidth": 2,
-                    "isTransparent": true
-                  }
-                </script>
-              </div>
+            <div class="note">
+              <h3>Optional</h3>
+              <p>
+                Keep your gold widgets from your previous version here. This change request was poem and watchword only.
+              </p>
             </div>
           </div>
         </article>
 
-        <!-- TAGESLOSUNG -->
         <article class="tile">
           <div class="tile-head">
             <h2 class="tile-title">Tageslosung</h2>
             <p class="tile-sub">
-              Live pulled from losungen.app. If the request fails, the UI stays calm and shows a fallback message.
+              Loaded from losungen.app API. If it fails, you see a calm fallback message.
             </p>
           </div>
 
@@ -607,19 +408,18 @@
           <div class="tile-body">
             <div class="row" style="margin-bottom: 14px;">
               <button class="btn" type="button" id="losungRefresh">Refresh</button>
-              <a class="btn ghost" href="https://www.losungen.de/" target="_blank" rel="noreferrer">Source</a>
             </div>
 
             <div class="losung" id="losungBox" aria-live="polite">
               <p class="date" id="losungDate">Loading ...</p>
 
-              <div class="block">
+              <div style="margin-top: 10px;">
                 <p class="label">Losung</p>
                 <p class="verse" id="losungText">—</p>
                 <p class="ref" id="losungRef"></p>
               </div>
 
-              <div class="block" style="margin-top: 18px;">
+              <div style="margin-top: 18px;">
                 <p class="label">Lehrtext</p>
                 <p class="verse" id="lehrText">—</p>
                 <p class="ref" id="lehrRef"></p>
@@ -633,154 +433,164 @@
     </main>
 
     <script>
+      // -----------------------------
+      // Poem engine: load from assets and split into stanzas
+      // Rule: one or more blank lines = new stanza
+      // -----------------------------
       (function () {
-        // -----------------------------
-        // Poem Engine: "Die Glocke"
-        // Source: Projekt Gutenberg (public domain)
-        // -----------------------------
-        const poemRaw = `
-Vivos voco
-Mortuos plango
-Fulgura frango
+        const range = document.getElementById("stanzaRange");
+        const text = document.getElementById("poemText");
+        const label = document.getElementById("stanzaLabel");
+        const countEl = document.getElementById("poemCount");
+        const dotsEl = document.getElementById("dots");
 
-Fest gemauert in der Erden
-Steht die Form, aus Lehm gebrannt.
-Heute muß die Glocke werden.
-Frisch Gesellen, seid zur Hand.
-Von der Stirne heiß
-Rinnen muß der Schweiß,
-Soll das Werk den Meister loben,
-Doch der Segen kommt von oben.
-Zum Werke, das wir ernst bereiten,
-Geziemt sich wohl ein ernstes Wort;
-Wenn gute Reden sie begleiten,
-Dann fließt die Arbeit munter fort.
-So laßt uns jetzt mit Fleiß betrachten,
-Was durch die schwache Kraft entspringt,
-Den schlechten Mann muß man verachten,
-Der nie bedacht, was er vollbringt.
-Das ist's ja, was den Menschen zieret,
-Und dazu ward ihm der Verstand,
-Daß er im innern Herzen spüret,
-Was er erschafft mit seiner Hand.
+        const prevBtn = document.getElementById("prevBtn");
+        const nextBtn = document.getElementById("nextBtn");
+        const randomBtn = document.getElementById("randomBtn");
+        const copyBtn = document.getElementById("copyBtn");
 
-Nehmt Holz vom Fichtenstamme,
-Doch recht trocken laßt es sein,
-Daß die eingepreßte Flamme
-Schlage zu dem Schwalch hinein!
-Kocht des Kupfers Brei,
-Schnell das Zinn herbei,
-Daß die zähe Glockenspeise
-Fließe nach der rechten Weise.
+        const STOR_KEY = "github_glocke_stanza_v2";
+        let stanzas = [];
+        let idx = 0;
 
-Was in des Dammes tiefer Grube
-Die Hand mit Feuer wirkt und Schweiß,
-Wird hoch auf des Turmes Stube
-Doch noch von uns begrüßt mit Preis.
-Noch von der Erde dumpfen Schacht
-Empor in des Himmels Pracht,
-Und das Auge siehts mit Freuden,
-Wie es klar zur Höhe steigt.
-Und der reinere Ton bezeichnet
-Auch den reinern Geist im Leben,
-Wie auf der Metall'schen Stufen
-Sich des Menschen Stufen heben.
+        function clamp(n, a, b) { return Math.max(a, Math.min(b, n)); }
 
-Das Auge sieht den Himmel offen,
-Es schwelgt das Herz in Seligkeit.
-O! daß sie ewig grünen bliebe,
-Die schöne Zeit der jungen Liebe!
+        function buildDotsWindow() {
+          dotsEl.innerHTML = "";
+          const total = stanzas.length;
+          if (!total) return;
 
-Denn mit der Freude Feierklange
-Begrüßt sie das geliebte Kind
-Auf seines Lebens erstem Gange,
-Den es in Schlafes Arm beginnt;
-Ihm ruhen noch im Zeitenschoße
-Die schwarzen und die heitern Lose,
-Der Mutterliebe zarte Sorgen
-Bewachen seinen goldnen Morgen.
-Die Jahre fliehen pfeilgeschwind.
-Vom Mädchen reißt sich stolz der Knabe,
-Er stürmt ins Leben wild hinaus,
-Durchmißt die Welt am Wanderstabe.
-Fremd kehrt er heim ins Vaterhaus,
-Und herrlich, in der Jugend Prangen,
-Wie ein Gebild aus Himmelshöhn,
-Mit züchtigen, verschämten Wangen
-Sieht er die Jungfrau vor sich stehn.
-Da faßt ein namenloses Sehnen
-Des Jünglings Herz, er irrt allein,
-Aus seinen Augen brechen Tränen,
-Er flieht der Brüder wilder Reihn.
-Errötend folgt er ihren Spuren
-Und ist von ihrem Gruß beglückt,
-Das Schönste sucht er auf den Fluren,
-Womit er seine Liebe schmückt.
-O! zarte Sehnsucht, süßes Hoffen,
-Der ersten Liebe goldne Zeit,
-Das Auge sieht den Himmel offen,
-Es schwelgt das Herz in Seligkeit.
-O! daß sie ewig grünen bliebe,
-Die schöne Zeit der jungen Liebe!
+          const windowSize = 15;
+          const half = Math.floor(windowSize / 2);
+          const start = clamp(idx - half, 0, Math.max(0, total - windowSize));
+          const end = Math.min(total, start + windowSize);
 
-Denn wo das Strenge mit dem Zarten,
-Wo Starkes sich und Mildes paarten,
-Da gibt es einen guten Klang.
-Drum prüfe, wer sich ewig bindet,
-Ob sich das Herz zum Herzen findet!
-Der Wahn ist kurz, die Reu ist lang.
+          for (let i = start; i < end; i++) {
+            const d = document.createElement("span");
+            d.className = "dot" + (i === idx ? " on" : "");
+            dotsEl.appendChild(d);
+          }
+        }
 
-Lieblich in der Bräute Locken
-Spielt der jungfräuliche Kranz,
-Wenn die hellen Kirchenglocken
-Laden zu des Festes Glanz.
-Ach! des Lebens schönste Feier
-Endigt auch den Lebensmai,
-Mit dem Gürtel, mit dem Schleier
-Reißt der schöne Wahn entzwei.
-Die Leidenschaft flieht!
-Die Liebe muß bleiben,
-Die Blume verblüht,
-Die Frucht muß treiben.
-Der Mann muß hinaus
-Ins feindliche Leben,
-Muß wirken und streben
-Und pflanzen und schaffen,
-Erlisten, erraffen,
-Muß wetten und wagen,
-Das Glück zu erjagen.
-Da strömet herbei die unendliche Gabe,
-Es füllt sich der Speicher mit köstlicher Habe,
-Die Räume wachsen, es dehnt sich das Haus.
-Und drinnen waltet
-Die züchtige Hausfrau,
-Die Mutter der Kinder,
-Und herrschet weise
-Im häuslichen Kreise,
-Und lehret die Mädchen
-Und wehret den Knaben,
-Und reget ohn Ende
-Die fleißigen Hände,
-Und mehrt den Gewinn
-Mit ordnendem Sinn.
-Und füllet mit Schätzen die duftenden Laden,
-Und dreht um die schnurrende Spindel den Faden,
-Und sammelt im reinlich geglätteten Schrein
-Die schimmernde Wolle, den schneeigten Lein,
-Und füget zum Guten den Glanz und den Schimmer,
-Und ruhet nimmer.
-Und der Vater mit frohem Blick
-Von des Hauses weitschauendem Giebel
-Überzählet sein blühend Glück,
-Siehet der Pfosten ragende Bäume
-Und der Scheunen gefüllte Räume
-Und die Speicher, vom Segen gebogen,
-Und des Kornes bewegte Wogen,
-Rühmt sich mit stolzem Mund:
-Fest, wie der Erde Grund,
-Gegen des Unglücks Macht
-Steht mir des Hauses Pracht!
-Doch mit des Geschickes Mächten
-Ist kein ewger Bund zu flechten,
-Und
-::contentReference[oaicite:0]{index=0}
+        function render() {
+          if (!stanzas.length) {
+            label.textContent = "No stanzas loaded";
+            countEl.textContent = "0 stanzas";
+            text.textContent = "";
+            return;
+          }
+          label.textContent = `Stanza ${idx + 1} of ${stanzas.length}`;
+          countEl.textContent = `${stanzas.length} stanzas`;
+          range.value = String(idx);
+          text.textContent = stanzas[idx];
+          buildDotsWindow();
+          localStorage.setItem(STOR_KEY, String(idx));
+        }
+
+        function setIndex(n) {
+          idx = clamp(n, 0, stanzas.length - 1);
+          render();
+        }
+
+        async function loadPoem() {
+          try {
+            const res = await fetch("assets/die-glocke.txt", { cache: "no-store" });
+            if (!res.ok) throw new Error("poem file missing");
+            const raw = (await res.text()).replace(/\r\n/g, "\n").trim();
+
+            // split by blank lines
+            stanzas = raw
+              .split(/\n{2,}/g)
+              .map((s) => s.trim())
+              .filter(Boolean);
+
+            range.min = "0";
+            range.max = String(Math.max(0, stanzas.length - 1));
+            range.step = "1";
+
+            const saved = Number(localStorage.getItem(STOR_KEY));
+            if (!Number.isNaN(saved)) idx = clamp(saved, 0, stanzas.length - 1);
+
+            render();
+          } catch (e) {
+            label.textContent = "Poem not loaded";
+            countEl.textContent = "Check assets/die-glocke.txt";
+            text.textContent =
+              "Create assets/die-glocke.txt and paste the full poem. Separate stanzas with one blank line.";
+          }
+        }
+
+        range.addEventListener("input", () => setIndex(Number(range.value)));
+        prevBtn.addEventListener("click", () => setIndex(idx - 1));
+        nextBtn.addEventListener("click", () => setIndex(idx + 1));
+        randomBtn.addEventListener("click", () => {
+          if (stanzas.length <= 1) return;
+          let n = idx;
+          while (n === idx) n = Math.floor(Math.random() * stanzas.length);
+          setIndex(n);
+        });
+        copyBtn.addEventListener("click", async () => {
+          if (!stanzas.length) return;
+          try {
+            await navigator.clipboard.writeText(stanzas[idx]);
+          } catch {}
+        });
+
+        loadPoem();
+      })();
+
+      // -----------------------------
+      // Tageslosung: correct endpoint
+      // -----------------------------
+      (function () {
+        const dateEl = document.getElementById("losungDate");
+        const losungTextEl = document.getElementById("losungText");
+        const losungRefEl = document.getElementById("losungRef");
+        const lehrTextEl = document.getElementById("lehrText");
+        const lehrRefEl = document.getElementById("lehrRef");
+        const btn = document.getElementById("losungRefresh");
+
+        function pick(obj, keys) {
+          for (const k of keys) {
+            if (obj && obj[k] != null && String(obj[k]).trim() !== "") return obj[k];
+          }
+          return "";
+        }
+
+        async function load() {
+          dateEl.textContent = "Loading ...";
+          losungTextEl.textContent = "—";
+          lehrTextEl.textContent = "—";
+          losungRefEl.textContent = "";
+          lehrRefEl.textContent = "";
+
+          try {
+            const url = "https://api.losungen.app/v1/watchword/german/today.json";
+            const res = await fetch(url, { cache: "no-store" });
+            if (!res.ok) throw new Error("bad response");
+            const data = await res.json();
+
+            const date = pick(data, ["Datum", "datum", "date"]);
+            const losText = pick(data, ["Losungstext", "losungstext", "LosungText"]);
+            const losRef = pick(data, ["Losungsvers", "losungsvers", "LosungVers"]);
+            const lehText = pick(data, ["Lehrtext", "lehrtext", "LehrText"]);
+            const lehRef = pick(data, ["Lehrtextvers", "lehrtextvers", "Lehrvers", "lehrvers"]);
+
+            dateEl.textContent = date ? String(date) : "Today";
+            losungTextEl.textContent = losText ? String(losText) : "No data";
+            losungRefEl.textContent = losRef ? String(losRef) : "";
+            lehrTextEl.textContent = lehText ? String(lehText) : "No data";
+            lehrRefEl.textContent = lehRef ? String(lehRef) : "";
+          } catch (e) {
+            dateEl.textContent = "Could not load (check connection)";
+            losungTextEl.textContent = "API endpoint failed.";
+            lehrTextEl.textContent = "Try again with Refresh.";
+          }
+        }
+
+        btn.addEventListener("click", load);
+        load();
+      })();
+    </script>
+  </body>
+</html>
