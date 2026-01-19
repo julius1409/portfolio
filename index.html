@@ -32,7 +32,8 @@
       }
 
       /* Hide native cursor everywhere when enabled */
-      body.custom-cursor, body.custom-cursor * { cursor: none !important; }
+      body.custom-cursor,
+      body.custom-cursor * { cursor: none !important; }
 
       .cursor-dot {
         position: fixed;
@@ -50,7 +51,7 @@
         transition: transform 0.03s linear;
       }
 
-      /* Subtle scroll blur applied to a wrapper so text stays readable */
+      /* Subtle scroll blur applied to a wrapper */
       #sharpen {
         filter: blur(0px);
         transition: filter 120ms linear;
@@ -65,13 +66,15 @@
         padding: 22px 18px 96px;
       }
 
+      /* Topbar: smaller + aligned to container edges */
       .topbar {
         position: sticky;
-        top: 14px;
+        top: 12px;
         z-index: 30;
         display: flex;
         justify-content: center;
-        margin: 14px 0 22px;
+        margin: 12px 0 18px;
+        padding: 0 18px; /* matches container horizontal padding */
       }
 
       .topbar-inner {
@@ -80,10 +83,10 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 14px;
-        padding: 12px 14px;
+        gap: 12px;
+        padding: 9px 12px; /* smaller */
         border-radius: 999px;
-        background: rgba(255,255,255,0.85);
+        background: rgba(255, 255, 255, 0.84);
         backdrop-filter: blur(12px);
         box-shadow: var(--shadow2);
       }
@@ -91,7 +94,7 @@
       .brand {
         text-decoration: none;
         color: var(--muted);
-        font-size: 0.95rem;
+        font-size: 0.9rem;
         white-space: nowrap;
       }
 
@@ -105,13 +108,16 @@
       .pill {
         text-decoration: none;
         color: var(--fg);
-        font-size: 0.95rem;
-        padding: 9px 12px;
+        font-size: 0.9rem;
+        padding: 7px 10px; /* smaller */
         border-radius: 999px;
-        background: rgba(0,0,0,0.04);
+        background: rgba(0, 0, 0, 0.04);
         transition: transform 160ms ease, background 160ms ease;
       }
-      .pill:hover { transform: translateY(-1px); background: rgba(0,0,0,0.06); }
+      .pill:hover {
+        transform: translateY(-1px);
+        background: rgba(0, 0, 0, 0.06);
+      }
 
       /* HERO */
       .hero {
@@ -122,9 +128,10 @@
       }
 
       .hero-media {
-        height: clamp(260px, 56vh, 560px);
+        height: clamp(240px, 52vh, 520px);
         position: relative;
         background: #000;
+        overflow: hidden;
       }
 
       .hero-media img {
@@ -137,22 +144,17 @@
         transition: opacity 240ms ease, transform 240ms ease;
       }
 
-      /* Soft fade to white at bottom for readability */
-      .hero-media::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(
-          to bottom,
-          rgba(255,255,255,0) 0%,
-          rgba(255,255,255,0.18) 45%,
-          rgba(255,255,255,0.82) 100%
-        );
-        pointer-events: none;
+      /* Divider guarantees clean separation between GIF and text */
+      .hero-divider {
+        height: 1px;
+        background: rgba(0, 0, 0, 0.06);
       }
 
       .hero-copy {
-        padding: 30px 22px 34px;
+        background: #fff;
+        position: relative;
+        z-index: 2;
+        padding: 34px 22px 38px;
         text-align: center;
       }
 
@@ -171,16 +173,16 @@
       }
 
       .lead {
-        margin: 14px auto 0;
+        margin: 16px auto 0;
         max-width: 78ch;
         color: var(--muted);
-        line-height: 1.75;
+        line-height: 1.8;
         font-size: 1.06rem;
       }
 
       /* SECTIONS */
       section.block {
-        margin-top: 30px;
+        margin-top: 34px;
         padding: 28px 0 0;
       }
 
@@ -193,27 +195,32 @@
       }
 
       .section-lead {
-        margin: 14px auto 0;
+        margin: 16px auto 0;
         max-width: 80ch;
         text-align: center;
         color: var(--muted);
-        line-height: 1.75;
+        line-height: 1.8;
+      }
+
+      /* Spacing between two section-lead paragraphs */
+      .section-lead + .section-lead {
+        margin-top: 14px;
       }
 
       /* PROJECT GRID */
       .projects {
-        margin-top: 26px;
+        margin-top: 28px;
         display: grid;
-        gap: 18px;
+        gap: 20px;
         grid-template-columns: 1fr;
       }
 
       @media (min-width: 740px) {
-        .projects { grid-template-columns: repeat(2, 1fr); gap: 18px; }
+        .projects { grid-template-columns: repeat(2, 1fr); gap: 20px; }
       }
 
       @media (min-width: 1020px) {
-        .projects { grid-template-columns: repeat(3, 1fr); gap: 18px; }
+        .projects { grid-template-columns: repeat(3, 1fr); gap: 20px; }
       }
 
       .card-link {
@@ -223,16 +230,15 @@
       }
 
       .card {
-        height: 300px;
+        height: 308px;
         border-radius: var(--radius);
-        background: #fff;                 /* not transparent */
+        background: #fff;
         box-shadow: var(--shadow);
         position: relative;
         overflow: hidden;
         transform: translateZ(0);
       }
 
-      /* Flip mechanism: stable (no multiple flips). Default is click-to-flip. */
       .card-inner {
         position: absolute;
         inset: 0;
@@ -241,19 +247,15 @@
       }
       .card.is-flipped .card-inner { transform: rotateY(180deg); }
 
-      /* Optional hover flip only for mouse devices (prevents annoying behavior on touch) */
-      @media (hover: hover) and (pointer: fine) {
-        .card.hover-flip:hover .card-inner { transform: rotateY(180deg); }
-      }
-
       .side {
         position: absolute;
         inset: 0;
-        padding: 22px 20px;
+        padding: 24px 22px;
         display: flex;
         flex-direction: column;
         justify-content: center;
         backface-visibility: hidden;
+        pointer-events: none; /* avoids multiple flips from inner hover */
       }
 
       .front {
@@ -267,10 +269,11 @@
       }
 
       .subtitle {
-        margin: 10px 0 0;
+        margin: 12px 0 0;
         color: var(--muted);
-        line-height: 1.65;
+        line-height: 1.7;
         font-size: 0.98rem;
+        max-width: 34ch;
       }
 
       .back {
@@ -288,21 +291,20 @@
         margin: 16px 0 0;
         padding-left: 18px;
         color: var(--muted);
-        line-height: 1.65;
+        line-height: 1.7;
       }
-
-      .facts li { margin-bottom: 8px; }
+      .facts li { margin-bottom: 9px; }
 
       .hint {
         margin-top: auto;
         text-align: center;
-        color: rgba(11,11,11,0.45);
+        color: rgba(11, 11, 11, 0.45);
         font-size: 0.92rem;
       }
 
       /* CONTACT */
       .contact {
-        margin-top: 26px;
+        margin-top: 28px;
         display: flex;
         justify-content: center;
         gap: 12px;
@@ -312,17 +314,20 @@
       .btn {
         text-decoration: none;
         color: var(--fg);
-        padding: 11px 16px;
+        padding: 12px 16px;
         border-radius: 999px;
-        background: rgba(0,0,0,0.04);
+        background: rgba(0, 0, 0, 0.04);
         transition: transform 160ms ease, background 160ms ease;
       }
-      .btn:hover { transform: translateY(-1px); background: rgba(0,0,0,0.06); }
+      .btn:hover {
+        transform: translateY(-1px);
+        background: rgba(0, 0, 0, 0.06);
+      }
 
       footer {
-        margin-top: 64px;
+        margin-top: 70px;
         text-align: center;
-        color: rgba(11,11,11,0.55);
+        color: rgba(11, 11, 11, 0.55);
         font-size: 0.92rem;
       }
 
@@ -351,9 +356,10 @@
       <div id="sharpen">
         <section class="hero" id="hero">
           <div class="hero-media">
-            <!-- Keep this path. Put your GIF at: assets/mood.gif -->
+            <!-- Put your GIF here: assets/mood.gif -->
             <img id="moodGif" src="assets/mood.gif" alt="Mood" />
           </div>
+          <div class="hero-divider" aria-hidden="true"></div>
           <div class="hero-copy">
             <p class="kicker">Learning portfolio</p>
             <h1>Julius (last name still loading)</h1>
@@ -375,20 +381,19 @@
 
           <p class="section-lead">
             Click a card to flip it. Click again to open the detail page.
-        </p>
-  <p class="section-lead">
-    Tip: On desktop, hover to preview. On mobile, tap once to flip, tap again to dive in.
-  </p>
+          </p>
+          <p class="section-lead">
+            Tip: Desktop is for hovering, mobile is for tapping. Either way, the cards will behave.
+          </p>
 
           <div class="projects">
-            <!-- 1 -->
             <a class="card-link" href="freifrau.html" aria-label="Open Freifrau Manufaktur project page">
               <article class="card" data-flip>
                 <div class="card-inner">
                   <div class="side front">
                     <h3 class="title">Freifrau Manufaktur</h3>
                     <p class="subtitle">Long term internship. Sourcing, workflows, measurable impact.</p>
-                    <div class="hint">Click to flip • Click again to close</div>
+                    <div class="hint">Click to flip. Go on.</div>
                   </div>
                   <div class="side back">
                     <h3>Key facts</h3>
@@ -398,20 +403,19 @@
                       <li>Workflow redesign to improve task ownership</li>
                       <li>Better transparency across teams</li>
                     </ul>
-                    <div class="hint">Click opens details</div>
+                    <div class="hint">Click again to get the full story.</div>
                   </div>
                 </div>
               </article>
             </a>
 
-            <!-- 2 -->
             <a class="card-link" href="edotex.html" aria-label="Open EdoTex project page">
               <article class="card" data-flip>
                 <div class="card-inner">
                   <div class="side front">
                     <h3 class="title">EdoTex</h3>
                     <p class="subtitle">Independent consulting. Process work, foundation, tooling.</p>
-                    <div class="hint">Click to flip • Click again to close</div>
+                    <div class="hint">Click to flip. Be curious.</div>
                   </div>
                   <div class="side back">
                     <h3>Key facts</h3>
@@ -421,66 +425,63 @@
                       <li>Google Workspace integration</li>
                       <li>Sales benchmarking baseline</li>
                     </ul>
-                    <div class="hint">Click opens details</div>
+                    <div class="hint">Click again to see the receipts.</div>
                   </div>
                 </div>
               </article>
             </a>
 
-            <!-- 3 -->
             <a class="card-link" href="shopware.html" aria-label="Open Shopware project page">
               <article class="card" data-flip>
                 <div class="card-inner">
                   <div class="side front">
                     <h3 class="title">Shopware</h3>
                     <p class="subtitle">B2B wholesale. SEO, CSS/HTML, cross selling improvements.</p>
-                    <div class="hint">Click to flip • Click again to close</div>
+                    <div class="hint">Click to flip. No glitches.</div>
                   </div>
                   <div class="side back">
                     <h3>Key facts</h3>
                     <ul class="facts">
                       <li>Website optimisation ownership (B2B SME)</li>
-                      <li>SEO uplift via HTML/CSS changes</li>
-                      <li>SISTRIX + Excel tracking</li>
+                      <li>SEO uplift via HTML and CSS changes</li>
+                      <li>SISTRIX plus Excel tracking</li>
                       <li>+3.5% YoY and +2% vs previous months</li>
                     </ul>
-                    <div class="hint">Click opens details</div>
+                    <div class="hint">Click again. Details are waiting.</div>
                   </div>
                 </div>
               </article>
             </a>
 
-            <!-- 4 -->
             <a class="card-link" href="sales.html" aria-label="Open Sales Benchmarking project page">
               <article class="card" data-flip>
                 <div class="card-inner">
                   <div class="side front">
                     <h3 class="title">Excel Benchmarking</h3>
-                    <p class="subtitle">Online B2B channel. Renner/penner + procurement levers.</p>
-                    <div class="hint">Click to flip • Click again to close</div>
+                    <p class="subtitle">Online B2B channel. Renner/penner plus procurement levers.</p>
+                    <div class="hint">Click to flip. Numbers talk.</div>
                   </div>
                   <div class="side back">
                     <h3>Key facts</h3>
                     <ul class="facts">
-                      <li>Renner/penner analysis to map winners/laggards</li>
+                      <li>Renner/penner analysis to map winners and laggards</li>
                       <li>Benchmarked assortment and performance</li>
                       <li>Identified purchasing optimisation opportunities</li>
                       <li>Improved decision base for buying</li>
                     </ul>
-                    <div class="hint">Click opens details</div>
+                    <div class="hint">Click again to go deeper.</div>
                   </div>
                 </div>
               </article>
             </a>
 
-            <!-- 5 -->
             <a class="card-link" href="github.html" aria-label="Open GitHub Ongoing project page">
               <article class="card" data-flip>
                 <div class="card-inner">
                   <div class="side front">
                     <h3 class="title">GitHub Ongoing</h3>
                     <p class="subtitle">Build, document, iterate. Learning by shipping.</p>
-                    <div class="hint">Click to flip • Click again to close</div>
+                    <div class="hint">Click to flip. Keep up.</div>
                   </div>
                   <div class="side back">
                     <h3>Key facts</h3>
@@ -490,20 +491,19 @@
                       <li>Experimenting with workflows and automation</li>
                       <li>Turning learning into visible artifacts</li>
                     </ul>
-                    <div class="hint">Click opens details</div>
+                    <div class="hint">Click again. There is more.</div>
                   </div>
                 </div>
               </article>
             </a>
 
-            <!-- 6 -->
             <a class="card-link" href="private.html" aria-label="Open Private Life project page">
               <article class="card" data-flip>
                 <div class="card-inner">
                   <div class="side front">
                     <h3 class="title">Private Life</h3>
                     <p class="subtitle">Habits, balance, curiosity. Energy over time.</p>
-                    <div class="hint">Click to flip • Click again to close</div>
+                    <div class="hint">Click to flip. Human mode.</div>
                   </div>
                   <div class="side back">
                     <h3>Key facts</h3>
@@ -513,7 +513,7 @@
                       <li>Curiosity-driven learning outside work</li>
                       <li>Relationships and long-term growth</li>
                     </ul>
-                    <div class="hint">Click opens details</div>
+                    <div class="hint">Click again. The plot thickens.</div>
                   </div>
                 </div>
               </article>
@@ -536,10 +536,10 @@
     </main>
 
     <script>
-      // Custom cursor dot
       (function () {
         const cursor = document.querySelector(".cursor-dot");
         if (!cursor) return;
+
         window.addEventListener(
           "pointermove",
           (e) => {
@@ -549,12 +549,11 @@
         );
       })();
 
-      // Subtle blur while actively scrolling
       (function () {
         const wrap = document.getElementById("sharpen");
         if (!wrap) return;
-        let t = null;
 
+        let t = null;
         window.addEventListener(
           "scroll",
           () => {
@@ -566,7 +565,6 @@
         );
       })();
 
-      // Fade GIF away when scrolling down
       (function () {
         const gif = document.getElementById("moodGif");
         const hero = document.getElementById("hero");
@@ -575,8 +573,7 @@
         function update() {
           const rect = hero.getBoundingClientRect();
           const vh = Math.max(window.innerHeight || 0, 1);
-          // When hero bottom goes above ~35% of viewport, fade out
-          const ratio = rect.bottom / (vh * 0.65);
+          const ratio = rect.bottom / (vh * 0.7);
           const opacity = Math.max(0, Math.min(1, ratio));
           gif.style.opacity = String(opacity);
           gif.style.transform = `scale(${1.01 + (1 - opacity) * 0.03})`;
@@ -587,31 +584,25 @@
         window.addEventListener("resize", update);
       })();
 
-      // Click-to-flip cards, but still allow clicking the link:
-      // First click flips; second click (on flipped) follows the link.
+      /* Click-to-flip: first click flips, second click navigates (link wraps the card) */
       (function () {
         const cards = document.querySelectorAll("[data-flip]");
-        cards.forEach((card) => {
+        const allCards = Array.from(cards);
+
+        allCards.forEach((card) => {
           card.addEventListener("click", (e) => {
             const isFlipped = card.classList.contains("is-flipped");
             if (!isFlipped) {
-              e.preventDefault();              // prevent navigation on first click
+              e.preventDefault();
+              allCards.forEach((c) => c.classList.remove("is-flipped"));
               card.classList.add("is-flipped");
-              return;
             }
-            // if already flipped, allow navigation (do not preventDefault)
-          });
-
-          // Click outside to close (optional): close when mouse leaves on desktop
-          card.addEventListener("mouseleave", () => {
-            card.classList.remove("is-flipped");
           });
         });
 
-        // Close any open card when pressing Escape
         window.addEventListener("keydown", (e) => {
           if (e.key === "Escape") {
-            cards.forEach((c) => c.classList.remove("is-flipped"));
+            allCards.forEach((c) => c.classList.remove("is-flipped"));
           }
         });
       })();
