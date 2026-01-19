@@ -307,39 +307,37 @@ body.page-index .card{
   html{scroll-behavior:auto;}
   #sharpen,.card-inner,.hero-media img{transition:none;}
 }
-/* index: topbar becomes a left sidebar on scroll (desktop only) */
+/* Elegant solution: no overlap + no layout jump (desktop only) */
 @media (min-width: 1020px){
-  body.page-index .topbar{
+  /* Reserve a constant left gutter on index so nothing shifts on scroll */
+  body.page-index .container{
+    padding-left: calc(18px + 300px); /* gutter size */
+  }
+
+  /* Start state: topbar behaves normally, but we can animate it */
+  body.page-index .topbar-inner{
+    transition: transform 260ms ease;
+    will-change: transform;
+  }
+
+  /* Scrolled state: pin topbar to the left gutter */
+  body.page-index.nav-side .topbar{
     position: fixed;
     top: 12px;
-    left: 0;
+    left: 18px;
     right: auto;
     margin: 0;
     padding: 0;
-    width: auto;
-    z-index: 50;
-    pointer-events: none;
-  }
-
-  body.page-index .topbar-inner{
-    pointer-events: auto;
-    transform: translate3d(0, 0, 0);
-    transition:
-      transform 260ms ease,
-      max-width 260ms ease,
-      padding 260ms ease,
-      border-radius 260ms ease;
+    width: 300px;       /* same width in row and column */
+    z-index: 60;
   }
 
   body.page-index.nav-side .topbar-inner{
-    max-width: 220px;
+    max-width: 300px;   /* lock width */
     margin: 0;
-    padding: 12px 12px;
-    border-radius: 22px;
-    transform: translate3d(18px, 0, 0);
     flex-direction: column;
     align-items: stretch;
-    gap: 10px;
+    transform: translate3d(0,0,0);
   }
 
   body.page-index.nav-side .brand{
@@ -349,18 +347,12 @@ body.page-index .card{
 
   body.page-index.nav-side .nav{
     flex-direction: column;
-    justify-content: flex-start;
-    gap: 8px;
+    align-items: stretch;
+    gap: 10px;
   }
 
   body.page-index.nav-side .pill{
+    width: 100%;
     text-align: center;
-    padding: 10px 10px;
-  }
-
-  /* keeps your content from sitting under the sidebar */
-  body.page-index.nav-side .container{
-    padding-left: 260px;
   }
 }
-
