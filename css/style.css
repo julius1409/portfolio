@@ -307,3 +307,60 @@ body.page-index .card{
   html{scroll-behavior:auto;}
   #sharpen,.card-inner,.hero-media img{transition:none;}
 }
+/* index: topbar becomes a left sidebar on scroll (desktop only) */
+@media (min-width: 1020px){
+  body.page-index .topbar{
+    position: fixed;
+    top: 12px;
+    left: 0;
+    right: auto;
+    margin: 0;
+    padding: 0;
+    width: auto;
+    z-index: 50;
+    pointer-events: none;
+  }
+
+  body.page-index .topbar-inner{
+    pointer-events: auto;
+    transform: translate3d(0, 0, 0);
+    transition:
+      transform 260ms ease,
+      max-width 260ms ease,
+      padding 260ms ease,
+      border-radius 260ms ease;
+  }
+
+  body.page-index.nav-side .topbar-inner{
+    max-width: 220px;
+    margin: 0;
+    padding: 12px 12px;
+    border-radius: 22px;
+    transform: translate3d(18px, 0, 0);
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  body.page-index.nav-side .brand{
+    text-align: center;
+    padding: 6px 0;
+  }
+
+  body.page-index.nav-side .nav{
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 8px;
+  }
+
+  body.page-index.nav-side .pill{
+    text-align: center;
+    padding: 10px 10px;
+  }
+
+  /* keeps your content from sitting under the sidebar */
+  body.page-index.nav-side .container{
+    padding-left: 260px;
+  }
+}
+
