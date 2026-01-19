@@ -14,75 +14,64 @@
       :root {
         --bg: #ffffff;
         --fg: #0b0b0b;
-        --muted: #4b4b4b;
-        --line: #e8e8e8;
-        --card: #f7f7f7;
-        --card2: #f2f2f2;
-        --radius: 14px;
+        --muted: rgba(11, 11, 11, 0.68);
+        --shadow: 0 18px 60px rgba(0, 0, 0, 0.08);
+        --shadow2: 0 10px 30px rgba(0, 0, 0, 0.06);
+        --radius: 18px;
         --max: 1180px;
       }
 
       * { box-sizing: border-box; }
-
       html { scroll-behavior: smooth; }
 
       body {
         margin: 0;
-        padding: 0 16px;
-        font-family: "Inconsolata", monospace;
         background: var(--bg);
         color: var(--fg);
+        font-family: "Inconsolata", monospace;
       }
 
-      body.custom-cursor { cursor: none; }
+      /* Hide native cursor everywhere when enabled */
+      body.custom-cursor, body.custom-cursor * { cursor: none !important; }
 
       .cursor-dot {
         position: fixed;
         top: 0;
         left: 0;
-        width: 14px;
-        height: 14px;
-        margin-top: -7px;
-        margin-left: -7px;
+        width: 16px;
+        height: 16px;
+        margin-left: -8px;
+        margin-top: -8px;
         border-radius: 50%;
         background: var(--fg);
         pointer-events: none;
-        z-index: 9999;
+        z-index: 2147483647;
         transform: translate3d(-100px, -100px, 0);
-        transition: transform 0.04s linear;
+        transition: transform 0.03s linear;
       }
 
-      .bg-layer {
-        position: fixed;
-        inset: 0;
-        z-index: -1;
-        background:
-          radial-gradient(900px 500px at 20% 10%, rgba(0,0,0,0.05), transparent 55%),
-          radial-gradient(900px 500px at 80% 60%, rgba(0,0,0,0.035), transparent 60%),
-          linear-gradient(#ffffff, #ffffff);
+      /* Subtle scroll blur applied to a wrapper so text stays readable */
+      #sharpen {
         filter: blur(0px);
-        transform: scale(1);
-        transition: filter 180ms ease, transform 180ms ease;
+        transition: filter 120ms linear;
       }
-
-      .bg-layer.is-scrolling {
-        filter: blur(10px);
-        transform: scale(1.02);
+      #sharpen.scrolling {
+        filter: blur(0.55px);
       }
 
       .container {
         max-width: var(--max);
         margin: 0 auto;
-        padding: 26px 0 70px;
+        padding: 22px 18px 96px;
       }
 
       .topbar {
         position: sticky;
         top: 14px;
-        z-index: 10;
+        z-index: 30;
         display: flex;
         justify-content: center;
-        margin-bottom: 18px;
+        margin: 14px 0 22px;
       }
 
       .topbar-inner {
@@ -91,49 +80,49 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+        gap: 14px;
         padding: 12px 14px;
-        border: 1px solid var(--line);
         border-radius: 999px;
-        background: rgba(255,255,255,0.9);
-        backdrop-filter: blur(10px);
+        background: rgba(255,255,255,0.85);
+        backdrop-filter: blur(12px);
+        box-shadow: var(--shadow2);
       }
 
       .brand {
-        color: var(--muted);
         text-decoration: none;
+        color: var(--muted);
         font-size: 0.95rem;
+        white-space: nowrap;
       }
 
       .nav {
         display: flex;
         gap: 10px;
         flex-wrap: wrap;
+        justify-content: flex-end;
       }
 
       .pill {
         text-decoration: none;
         color: var(--fg);
         font-size: 0.95rem;
-        padding: 8px 12px;
+        padding: 9px 12px;
         border-radius: 999px;
-        border: 1px solid transparent;
+        background: rgba(0,0,0,0.04);
+        transition: transform 160ms ease, background 160ms ease;
       }
+      .pill:hover { transform: translateY(-1px); background: rgba(0,0,0,0.06); }
 
-      .pill:hover {
-        border-color: var(--line);
-        background: #fff;
-      }
-
+      /* HERO */
       .hero {
-        border: 1px solid var(--line);
         border-radius: var(--radius);
         overflow: hidden;
         background: #fff;
+        box-shadow: var(--shadow);
       }
 
       .hero-media {
-        height: clamp(260px, 52vh, 520px);
-        width: 100%;
+        height: clamp(260px, 56vh, 560px);
         position: relative;
         background: #000;
       }
@@ -143,10 +132,12 @@
         height: 100%;
         object-fit: cover;
         display: block;
-        filter: grayscale(1) contrast(1.05);
-        opacity: 0.92;
+        opacity: 1;
+        transform: scale(1.01);
+        transition: opacity 240ms ease, transform 240ms ease;
       }
 
+      /* Soft fade to white at bottom for readability */
       .hero-media::after {
         content: "";
         position: absolute;
@@ -154,112 +145,111 @@
         background: linear-gradient(
           to bottom,
           rgba(255,255,255,0) 0%,
-          rgba(255,255,255,0.35) 55%,
-          rgba(255,255,255,0.85) 100%
+          rgba(255,255,255,0.18) 45%,
+          rgba(255,255,255,0.82) 100%
         );
         pointer-events: none;
       }
 
       .hero-copy {
-        padding: 22px 18px 26px;
+        padding: 30px 22px 34px;
         text-align: center;
       }
 
       .kicker {
         margin: 0;
         color: var(--muted);
-        letter-spacing: 0.12em;
+        letter-spacing: 0.14em;
         text-transform: uppercase;
         font-size: 0.92rem;
       }
 
       h1 {
-        margin: 10px 0 0;
-        font-size: clamp(2.2rem, 3.6vw + 1rem, 3.3rem);
+        margin: 12px 0 0;
+        font-size: clamp(2.2rem, 3.8vw + 1rem, 3.4rem);
         letter-spacing: -0.02em;
       }
 
       .lead {
-        margin: 12px auto 0;
-        max-width: 74ch;
+        margin: 14px auto 0;
+        max-width: 78ch;
         color: var(--muted);
-        line-height: 1.7;
-        font-size: 1.05rem;
+        line-height: 1.75;
+        font-size: 1.06rem;
       }
 
-      section {
-        margin-top: 18px;
-        border: 1px solid var(--line);
-        border-radius: var(--radius);
-        background: #fff;
-        overflow: hidden;
-      }
-
-      .section-header {
-        padding: 18px 16px;
-        text-align: center;
-        background: #fff;
-        border-bottom: 1px solid var(--line);
+      /* SECTIONS */
+      section.block {
+        margin-top: 30px;
+        padding: 28px 0 0;
       }
 
       h2 {
         margin: 0;
+        text-align: center;
         font-size: 1.15rem;
-        letter-spacing: 0.12em;
+        letter-spacing: 0.14em;
         text-transform: uppercase;
       }
 
-      .section-body {
-        padding: 18px 16px 22px;
-      }
-
       .section-lead {
-        margin: 0 auto;
-        max-width: 78ch;
+        margin: 14px auto 0;
+        max-width: 80ch;
         text-align: center;
         color: var(--muted);
-        line-height: 1.7;
+        line-height: 1.75;
       }
 
+      /* PROJECT GRID */
       .projects {
-        margin-top: 16px;
+        margin-top: 26px;
         display: grid;
-        gap: 16px;
+        gap: 18px;
         grid-template-columns: 1fr;
       }
 
       @media (min-width: 740px) {
-        .projects { grid-template-columns: repeat(2, 1fr); }
+        .projects { grid-template-columns: repeat(2, 1fr); gap: 18px; }
       }
 
       @media (min-width: 1020px) {
-        .projects { grid-template-columns: repeat(3, 1fr); }
+        .projects { grid-template-columns: repeat(3, 1fr); gap: 18px; }
       }
 
-      .project {
-        perspective: 1200px;
+      .card-link {
+        text-decoration: none;
+        color: inherit;
+        display: block;
       }
 
-      .project-card {
-        height: 260px;
-        border-radius: 16px;
-        border: 1px solid var(--line);
-        background: var(--card);
-        box-shadow: 0 18px 50px rgba(0,0,0,0.06);
+      .card {
+        height: 300px;
+        border-radius: var(--radius);
+        background: #fff;                 /* not transparent */
+        box-shadow: var(--shadow);
+        position: relative;
+        overflow: hidden;
+        transform: translateZ(0);
+      }
+
+      /* Flip mechanism: stable (no multiple flips). Default is click-to-flip. */
+      .card-inner {
+        position: absolute;
+        inset: 0;
         transform-style: preserve-3d;
-        transition: transform 520ms cubic-bezier(0.2, 0.9, 0.2, 1), background 220ms ease;
-        will-change: transform;
+        transition: transform 520ms cubic-bezier(0.2, 0.9, 0.2, 1);
       }
+      .card.is-flipped .card-inner { transform: rotateY(180deg); }
 
-      .project-card:hover {
-        transform: rotateY(180deg) translateZ(0);
-        background: var(--card2);
+      /* Optional hover flip only for mouse devices (prevents annoying behavior on touch) */
+      @media (hover: hover) and (pointer: fine) {
+        .card.hover-flip:hover .card-inner { transform: rotateY(180deg); }
       }
 
       .side {
         position: absolute;
         inset: 0;
-        padding: 18px;
+        padding: 22px 20px;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -267,18 +257,19 @@
       }
 
       .front {
+        align-items: center;
         text-align: center;
       }
 
-      .front h3 {
+      .title {
         margin: 0;
         font-size: 1.15rem;
       }
 
-      .front p {
+      .subtitle {
         margin: 10px 0 0;
         color: var(--muted);
-        line-height: 1.6;
+        line-height: 1.65;
         font-size: 0.98rem;
       }
 
@@ -287,61 +278,62 @@
         justify-content: flex-start;
       }
 
-      .back h4 {
+      .back h3 {
         margin: 0;
         font-size: 1.05rem;
         text-align: center;
       }
 
-      .back ul {
-        margin: 12px 0 0;
+      .facts {
+        margin: 16px 0 0;
         padding-left: 18px;
         color: var(--muted);
-        line-height: 1.6;
+        line-height: 1.65;
       }
 
-      .back li { margin-bottom: 7px; }
+      .facts li { margin-bottom: 8px; }
 
-      .contact-links {
+      .hint {
+        margin-top: auto;
+        text-align: center;
+        color: rgba(11,11,11,0.45);
+        font-size: 0.92rem;
+      }
+
+      /* CONTACT */
+      .contact {
+        margin-top: 26px;
         display: flex;
         justify-content: center;
         gap: 12px;
         flex-wrap: wrap;
-        margin-top: 14px;
       }
 
-      .contact-link {
+      .btn {
         text-decoration: none;
         color: var(--fg);
-        border: 1px solid var(--line);
-        padding: 10px 16px;
+        padding: 11px 16px;
         border-radius: 999px;
-        background: #fff;
-        transition: background 200ms ease, transform 200ms ease;
+        background: rgba(0,0,0,0.04);
+        transition: transform 160ms ease, background 160ms ease;
       }
-
-      .contact-link:hover {
-        background: var(--card);
-        transform: translateY(-1px);
-      }
+      .btn:hover { transform: translateY(-1px); background: rgba(0,0,0,0.06); }
 
       footer {
+        margin-top: 64px;
         text-align: center;
-        padding: 30px 0 0;
-        color: var(--muted);
-        font-size: 0.9rem;
+        color: rgba(11,11,11,0.55);
+        font-size: 0.92rem;
       }
 
       @media (prefers-reduced-motion: reduce) {
         html { scroll-behavior: auto; }
-        .project-card { transition: none; }
-        .bg-layer { transition: none; }
+        #sharpen, .card-inner, .hero-media img { transition: none; }
       }
     </style>
   </head>
 
   <body class="custom-cursor">
-    <div class="bg-layer" aria-hidden="true"></div>
     <div class="cursor-dot" aria-hidden="true"></div>
 
     <div class="topbar">
@@ -356,87 +348,269 @@
     </div>
 
     <main id="top" class="container">
-      <section class="hero">
-        <div class="hero-media">
-          <!-- Put your GIF here: create assets/mood.gif in your repo -->
-          <img src="assets/mood.gif" alt="Mood" />
-        </div>
-        <div class="hero-copy">
-          <p class="kicker">Learning portfolio</p>
-          <h1>Julius (last name still loading)</h1>
-          <p class="lead">
-            Roles, results, and experiments. Six projects, each one representing a workplace or a chapter.
-          </p>
-        </div>
-      </section>
+      <div id="sharpen">
+        <section class="hero" id="hero">
+          <div class="hero-media">
+            <!-- Keep this path. Put your GIF at: assets/mood.gif -->
+            <img id="moodGif" src="assets/mood.gif" alt="Mood" />
+          </div>
+          <div class="hero-copy">
+            <p class="kicker">Learning portfolio</p>
+            <h1>Julius (last name still loading)</h1>
+            <p class="lead">
+              Six projects, each representing a workplace or a chapter. Clean, fast, and built as a learning project.
+            </p>
+          </div>
+        </section>
 
-      <section id="about">
-        <div class="section-header">
+        <section id="about" class="block">
           <h2>About</h2>
-        </div>
-        <div class="section-body">
           <p class="section-lead">
-            I learn fast by building real things. This site stays lean on purpose, with a focus on clarity, speed, and a clean narrative.
+            I learn by shipping. This site stays intentionally minimal, with a focus on clarity, strong results, and clean structure.
           </p>
-        </div>
-      </section>
+        </section>
 
-      <section id="projects">
-        <div class="section-header">
+        <section id="projects" class="block">
           <h2>Projects</h2>
-        </div>
-        <div class="section-body">
           <p class="section-lead">
-            Hover a card to flip it. On mobile you can tap, depending on browser behavior.
+            Click a card to flip it. Click again to close. Click anywhere on the card to open the detail page.
           </p>
 
           <div class="projects">
-            <div class="project">
-              <div class="project-card">
-                <div class="side front">
-                  <h3>Freifrau Manufaktur</h3>
-                  <p>Long term internship. Sourcing, workflows, cost impact.</p>
+            <!-- 1 -->
+            <a class="card-link" href="freifrau.html" aria-label="Open Freifrau Manufaktur project page">
+              <article class="card" data-flip>
+                <div class="card-inner">
+                  <div class="side front">
+                    <h3 class="title">Freifrau Manufaktur</h3>
+                    <p class="subtitle">Long term internship. Sourcing, workflows, measurable impact.</p>
+                    <div class="hint">Click to flip • Click again to close</div>
+                  </div>
+                  <div class="side back">
+                    <h3>Key facts</h3>
+                    <ul class="facts">
+                      <li>Reorganized sourcing for advertisement material</li>
+                      <li>$10,000 savings vs previous handling</li>
+                      <li>Workflow redesign to improve task ownership</li>
+                      <li>Better transparency across teams</li>
+                    </ul>
+                    <div class="hint">Click opens details</div>
+                  </div>
                 </div>
-                <div class="side back">
-                  <h4>Highlights</h4>
-                  <ul>
-                    <li>Reorganized sourcing of advertisement material</li>
-                    <li>Saved $10,000 compared to prior handling</li>
-                    <li>Restructured internal workflows for clearer task ownership</li>
-                    <li>Improved transparency and follow up across teams</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
+              </article>
+            </a>
 
-            <div class="project">
-              <div class="project-card">
-                <div class="side front">
-                  <h3>EdoTex</h3>
-                  <p>Independent consulting. Process work, foundations, tooling.</p>
+            <!-- 2 -->
+            <a class="card-link" href="edotex.html" aria-label="Open EdoTex project page">
+              <article class="card" data-flip>
+                <div class="card-inner">
+                  <div class="side front">
+                    <h3 class="title">EdoTex</h3>
+                    <p class="subtitle">Independent consulting. Process work, foundation, tooling.</p>
+                    <div class="hint">Click to flip • Click again to close</div>
+                  </div>
+                  <div class="side back">
+                    <h3>Key facts</h3>
+                    <ul class="facts">
+                      <li>Process optimization for a young textile agency</li>
+                      <li>Foundation work and operating routines</li>
+                      <li>Google Workspace integration</li>
+                      <li>Sales benchmarking baseline</li>
+                    </ul>
+                    <div class="hint">Click opens details</div>
+                  </div>
                 </div>
-                <div class="side back">
-                  <h4>Highlights</h4>
-                  <ul>
-                    <li>Process optimization for a young textile agency</li>
-                    <li>Foundation work and operating routines</li>
-                    <li>Google Workspace integration for collaboration</li>
-                    <li>Sales benchmarking for measurable improvement</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
+              </article>
+            </a>
 
-            <div class="project">
-              <div class="project-card">
-                <div class="side front">
-                  <h3>Shopware</h3>
-                  <p>B2B wholesaler. SEO, CSS, HTML, cross selling, tracking.</p>
+            <!-- 3 -->
+            <a class="card-link" href="shopware.html" aria-label="Open Shopware project page">
+              <article class="card" data-flip>
+                <div class="card-inner">
+                  <div class="side front">
+                    <h3 class="title">Shopware</h3>
+                    <p class="subtitle">B2B wholesale. SEO, CSS/HTML, cross selling improvements.</p>
+                    <div class="hint">Click to flip • Click again to close</div>
+                  </div>
+                  <div class="side back">
+                    <h3>Key facts</h3>
+                    <ul class="facts">
+                      <li>Website optimisation ownership (B2B SME)</li>
+                      <li>SEO uplift via HTML/CSS changes</li>
+                      <li>SISTRIX + Excel tracking</li>
+                      <li>+3.5% YoY and +2% vs previous months</li>
+                    </ul>
+                    <div class="hint">Click opens details</div>
+                  </div>
                 </div>
-                <div class="side back">
-                  <h4>Highlights</h4>
-                  <ul>
-                    <li>Owned website improvements for an SME B2B wholesaler</li>
-                    <li>SEO improvements via HTML and CSS adjustments</li>
-                    <li>Used SISTRIX and Excel for tracking and prioritization</li>
-                    <li>Results: +3.5% YoY since October, +2% vs previous months</li>
+              </article>
+            </a>
+
+            <!-- 4 -->
+            <a class="card-link" href="sales.html" aria-label="Open Sales Benchmarking project page">
+              <article class="card" data-flip>
+                <div class="card-inner">
+                  <div class="side front">
+                    <h3 class="title">Excel Benchmarking</h3>
+                    <p class="subtitle">Online B2B channel. Renner/penner + procurement levers.</p>
+                    <div class="hint">Click to flip • Click again to close</div>
+                  </div>
+                  <div class="side back">
+                    <h3>Key facts</h3>
+                    <ul class="facts">
+                      <li>Renner/penner analysis to map winners/laggards</li>
+                      <li>Benchmarked assortment and performance</li>
+                      <li>Identified purchasing optimisation opportunities</li>
+                      <li>Improved decision base for buying</li>
+                    </ul>
+                    <div class="hint">Click opens details</div>
+                  </div>
+                </div>
+              </article>
+            </a>
+
+            <!-- 5 -->
+            <a class="card-link" href="github.html" aria-label="Open GitHub Ongoing project page">
+              <article class="card" data-flip>
+                <div class="card-inner">
+                  <div class="side front">
+                    <h3 class="title">GitHub Ongoing</h3>
+                    <p class="subtitle">Build, document, iterate. Learning by shipping.</p>
+                    <div class="hint">Click to flip • Click again to close</div>
+                  </div>
+                  <div class="side back">
+                    <h3>Key facts</h3>
+                    <ul class="facts">
+                      <li>Continuous repositories and iterations</li>
+                      <li>Clean structure and documentation habits</li>
+                      <li>Experimenting with workflows and automation</li>
+                      <li>Turning learning into visible artifacts</li>
+                    </ul>
+                    <div class="hint">Click opens details</div>
+                  </div>
+                </div>
+              </article>
+            </a>
+
+            <!-- 6 -->
+            <a class="card-link" href="private.html" aria-label="Open Private Life project page">
+              <article class="card" data-flip>
+                <div class="card-inner">
+                  <div class="side front">
+                    <h3 class="title">Private Life</h3>
+                    <p class="subtitle">Habits, balance, curiosity. Energy over time.</p>
+                    <div class="hint">Click to flip • Click again to close</div>
+                  </div>
+                  <div class="side back">
+                    <h3>Key facts</h3>
+                    <ul class="facts">
+                      <li>Consistency habits that compound</li>
+                      <li>Balancing work and health</li>
+                      <li>Curiosity-driven learning outside work</li>
+                      <li>Relationships and long-term growth</li>
+                    </ul>
+                    <div class="hint">Click opens details</div>
+                  </div>
+                </div>
+              </article>
+            </a>
+          </div>
+        </section>
+
+        <section id="contact" class="block">
+          <h2>Contact</h2>
+          <p class="section-lead">Add real links when you are ready.</p>
+          <div class="contact">
+            <a class="btn" href="#" aria-disabled="true">Email</a>
+            <a class="btn" href="#" aria-disabled="true">GitHub</a>
+            <a class="btn" href="#" aria-disabled="true">LinkedIn</a>
+          </div>
+        </section>
+
+        <footer>Built as a learning project. Updated regularly.</footer>
+      </div>
+    </main>
+
+    <script>
+      // Custom cursor dot
+      (function () {
+        const cursor = document.querySelector(".cursor-dot");
+        if (!cursor) return;
+        window.addEventListener(
+          "pointermove",
+          (e) => {
+            cursor.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
+          },
+          { passive: true }
+        );
+      })();
+
+      // Subtle blur while actively scrolling
+      (function () {
+        const wrap = document.getElementById("sharpen");
+        if (!wrap) return;
+        let t = null;
+
+        window.addEventListener(
+          "scroll",
+          () => {
+            wrap.classList.add("scrolling");
+            clearTimeout(t);
+            t = setTimeout(() => wrap.classList.remove("scrolling"), 140);
+          },
+          { passive: true }
+        );
+      })();
+
+      // Fade GIF away when scrolling down
+      (function () {
+        const gif = document.getElementById("moodGif");
+        const hero = document.getElementById("hero");
+        if (!gif || !hero) return;
+
+        function update() {
+          const rect = hero.getBoundingClientRect();
+          const vh = Math.max(window.innerHeight || 0, 1);
+          // When hero bottom goes above ~35% of viewport, fade out
+          const ratio = rect.bottom / (vh * 0.65);
+          const opacity = Math.max(0, Math.min(1, ratio));
+          gif.style.opacity = String(opacity);
+          gif.style.transform = `scale(${1.01 + (1 - opacity) * 0.03})`;
+        }
+
+        update();
+        window.addEventListener("scroll", update, { passive: true });
+        window.addEventListener("resize", update);
+      })();
+
+      // Click-to-flip cards, but still allow clicking the link:
+      // First click flips; second click (on flipped) follows the link.
+      (function () {
+        const cards = document.querySelectorAll("[data-flip]");
+        cards.forEach((card) => {
+          card.addEventListener("click", (e) => {
+            const isFlipped = card.classList.contains("is-flipped");
+            if (!isFlipped) {
+              e.preventDefault();              // prevent navigation on first click
+              card.classList.add("is-flipped");
+              return;
+            }
+            // if already flipped, allow navigation (do not preventDefault)
+          });
+
+          // Click outside to close (optional): close when mouse leaves on desktop
+          card.addEventListener("mouseleave", () => {
+            card.classList.remove("is-flipped");
+          });
+        });
+
+        // Close any open card when pressing Escape
+        window.addEventListener("keydown", (e) => {
+          if (e.key === "Escape") {
+            cards.forEach((c) => c.classList.remove("is-flipped"));
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>
