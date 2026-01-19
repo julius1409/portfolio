@@ -279,3 +279,26 @@
     </script>
   </body>
 </html>
+
+<script>
+  /* existing scripts above... */
+
+  (function () {
+    const body = document.body;
+    const mq = window.matchMedia("(min-width: 1020px)");
+
+    function update() {
+      if (!mq.matches) {
+        body.classList.remove("nav-side");
+        return;
+      }
+      const y = window.scrollY || document.documentElement.scrollTop || 0;
+      body.classList.toggle("nav-side", y > 180);
+    }
+
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+  })();
+</script>
+
