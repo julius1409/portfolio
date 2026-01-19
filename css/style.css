@@ -28,7 +28,7 @@ body.page-detail{ --max:980px; }
   padding:22px 18px 96px;
 }
 
-/* topbar */
+/* topbar (fixed to match container on ALL pages incl. index) */
 .topbar{
   position:sticky;
   top:12px;
@@ -36,11 +36,12 @@ body.page-detail{ --max:980px; }
   display:flex;
   justify-content:center;
   margin:12px 0 18px;
-  padding:0 18px;
+  padding:0;              /* changed */
 }
 .topbar-inner{
   width:100%;
   max-width:var(--max);
+  margin:0 18px;          /* changed: matches container side padding */
   display:flex;
   align-items:center;
   justify-content:space-between;
