@@ -279,55 +279,20 @@
     </script>
   </body>
 </html>
+(function () {
+  const body = document.body;
+  const mq = window.matchMedia("(min-width: 1020px)");
 
-/* Elegant solution: no overlap + no layout jump (desktop only) */
-@media (min-width: 1020px){
-  /* Reserve a constant left gutter on index so nothing shifts on scroll */
-  body.page-index .container{
-    padding-left: calc(18px + 300px); /* gutter size */
+  function update() {
+    if (!mq.matches) {
+      body.classList.remove("nav-side");
+      return;
+    }
+    const y = window.scrollY || document.documentElement.scrollTop || 0;
+    body.classList.toggle("nav-side", y > 180);
   }
 
-  /* Start state: topbar behaves normally, but we can animate it */
-  body.page-index .topbar-inner{
-    transition: transform 260ms ease;
-    will-change: transform;
-  }
-
-  /* Scrolled state: pin topbar to the left gutter */
-  body.page-index.nav-side .topbar{
-    position: fixed;
-    top: 12px;
-    left: 18px;
-    right: auto;
-    margin: 0;
-    padding: 0;
-    width: 300px;       /* same width in row and column */
-    z-index: 60;
-  }
-
-  body.page-index.nav-side .topbar-inner{
-    max-width: 300px;   /* lock width */
-    margin: 0;
-    flex-direction: column;
-    align-items: stretch;
-    transform: translate3d(0,0,0);
-  }
-
-  body.page-index.nav-side .brand{
-    text-align: center;
-    padding: 6px 0;
-  }
-
-  body.page-index.nav-side .nav{
-    flex-direction: column;
-    align-items: stretch;
-    gap: 10px;
-  }
-
-  body.page-index.nav-side .pill{
-    width: 100%;
-    text-align: center;
-  }
-}
-
-
+  update();
+  window.addEventListener("scroll", update, { passive: true });
+  window.addEventListener("resize", update);
+})();
