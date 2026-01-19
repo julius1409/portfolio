@@ -1,4 +1,4 @@
-<!-- github.html -->
+<!-- github.html (standalone experiment page, includes its own CSS and a small JS reveal) -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -6,53 +6,408 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>GitHub Ongoing | Julius</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="css/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root{
+        --bg:#ffffff;
+        --fg:#0b0b0b;
+        --muted:rgba(11,11,11,0.62);
+        --hair:rgba(11,11,11,0.10);
+        --soft:rgba(11,11,11,0.04);
+        --radius:18px;
+        --max:980px;
+
+        --s-1: 10px;
+        --s0: 14px;
+        --s1: 18px;
+        --s2: 24px;
+        --s3: 34px;
+        --s4: 48px;
+        --s5: 72px;
+      }
+
+      *{ box-sizing:border-box; }
+      html{ scroll-behavior:smooth; }
+      body{
+        margin:0;
+        background:var(--bg);
+        color:var(--fg);
+        font-family:"Inconsolata", monospace;
+        line-height:1.75;
+        letter-spacing:0.01em;
+      }
+
+      .container{
+        max-width:var(--max);
+        margin:0 auto;
+        padding: 18px 18px 88px;
+      }
+
+      /* Topbar */
+      .topbar{
+        position: sticky;
+        top: 12px;
+        z-index: 50;
+        display:flex;
+        justify-content:center;
+        padding: 0;
+        margin: 12px 0 18px;
+      }
+      .topbar-inner{
+        width:100%;
+        max-width:var(--max);
+        margin: 0 18px;
+        padding: 10px 12px;
+        border-radius: 999px;
+        background: rgba(255,255,255,0.86);
+        backdrop-filter: blur(12px);
+        border: 1px solid var(--hair);
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        gap: 12px;
+      }
+      .brand{
+        text-decoration:none;
+        color: var(--fg);
+        font-weight: 700;
+        font-size: 0.95rem;
+        letter-spacing: 0.02em;
+        white-space: nowrap;
+      }
+      .nav{
+        display:flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content:flex-end;
+      }
+      .pill{
+        text-decoration:none;
+        color: var(--fg);
+        font-size: 0.92rem;
+        padding: 8px 11px;
+        border-radius: 999px;
+        background: var(--soft);
+        border: 1px solid transparent;
+        transition: transform 160ms ease, background 160ms ease, border-color 160ms ease;
+      }
+      .pill:hover{
+        transform: translateY(-1px);
+        background: rgba(11,11,11,0.06);
+        border-color: var(--hair);
+      }
+
+      /* Page header */
+      header.hero{
+        padding: var(--s5) 0 var(--s3);
+        text-align: center;
+      }
+      .kicker{
+        margin: 0;
+        color: var(--muted);
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        font-size: 0.9rem;
+      }
+      h1{
+        margin: var(--s1) 0 0;
+        font-size: clamp(2.2rem, 3.6vw + 1rem, 3.2rem);
+        letter-spacing: -0.02em;
+        line-height: 1.1;
+      }
+      .lead{
+        margin: var(--s2) auto 0;
+        max-width: 76ch;
+        color: var(--muted);
+        font-size: 1.05rem;
+        line-height: 1.9;
+      }
+
+      /* Sub header row */
+      .meta-row{
+        margin-top: var(--s3);
+        display:grid;
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      @media (min-width: 820px){
+        .meta-row{ grid-template-columns: 1.2fr 0.8fr; gap: 16px; }
+      }
+
+      .panel{
+        border: 1px solid var(--hair);
+        border-radius: var(--radius);
+        background: #fff;
+        padding: 18px;
+      }
+      .panel h2{
+        margin: 0;
+        font-size: 1.0rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+      .panel p{
+        margin: 12px 0 0;
+        color: var(--muted);
+      }
+      .tags{
+        margin-top: 14px;
+        display:flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .tag{
+        font-size: 0.9rem;
+        color: var(--fg);
+        padding: 7px 10px;
+        border-radius: 999px;
+        background: var(--soft);
+        border: 1px solid var(--hair);
+        white-space: nowrap;
+      }
+
+      /* Content blocks */
+      .section{
+        margin-top: var(--s5);
+      }
+
+      .section-title{
+        display:flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 12px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid var(--hair);
+      }
+      .section-title h2{
+        margin: 0;
+        font-size: 1.05rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+      .section-title .small{
+        color: var(--muted);
+        font-size: 0.92rem;
+        white-space: nowrap;
+      }
+
+      .grid{
+        margin-top: var(--s2);
+        display:grid;
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+      @media (min-width: 820px){
+        .grid{ grid-template-columns: 1fr 1fr; gap: 16px; }
+      }
+
+      .card{
+        border: 1px solid var(--hair);
+        border-radius: var(--radius);
+        background: #fff;
+        padding: 18px;
+        transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+      }
+      .card:hover{
+        transform: translateY(-2px);
+        box-shadow: 0 18px 55px rgba(0,0,0,0.06);
+        border-color: rgba(11,11,11,0.18);
+      }
+      .card h3{
+        margin: 0;
+        font-size: 1.05rem;
+        letter-spacing: -0.01em;
+      }
+      .card p{
+        margin: 10px 0 0;
+        color: var(--muted);
+      }
+
+      /* Quote block */
+      blockquote{
+        margin: 0;
+        padding: 18px 18px;
+        border-radius: var(--radius);
+        border: 1px solid var(--hair);
+        background: #fff;
+      }
+      blockquote p{
+        margin: 0;
+        font-size: 1.02rem;
+        line-height: 1.9;
+      }
+      .quote-meta{
+        margin-top: 12px;
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      /* Subtle reveal */
+      .reveal{
+        opacity: 0;
+        transform: translateY(10px);
+        transition: opacity 420ms ease, transform 420ms ease;
+      }
+      .reveal.is-in{
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      footer{
+        margin-top: var(--s5);
+        padding-top: var(--s2);
+        border-top: 1px solid var(--hair);
+        text-align:center;
+        color: rgba(11,11,11,0.55);
+        font-size: 0.92rem;
+      }
+
+      @media (prefers-reduced-motion: reduce){
+        html{ scroll-behavior:auto; }
+        .reveal{ opacity: 1; transform: none; transition: none; }
+        .card{ transition: none; }
+        .card:hover{ transform:none; box-shadow:none; }
+      }
+    </style>
   </head>
 
-  <body class="page-detail">
+  <body>
     <div class="topbar">
       <div class="topbar-inner">
         <a class="brand" href="index.html">Julius</a>
         <nav class="nav">
           <a class="pill" href="index.html#projects">Back to Projects</a>
+          <a class="pill" href="#notes">Notes</a>
+          <a class="pill" href="#excerpt">Excerpt</a>
         </nav>
       </div>
     </div>
 
     <main class="container">
-      <header>
+      <header class="hero reveal">
         <p class="kicker">Project</p>
         <h1>GitHub Ongoing</h1>
         <p class="lead">
-          Public learning trail: shipping small, iterating fast, and documenting what I learn.
+          A public learning trail focused on shipping, documentation, and clean iteration.
+          Minimal on purpose. Precise where it matters.
         </p>
+
+        <div class="meta-row">
+          <div class="panel reveal">
+            <h2>Working style</h2>
+            <p>
+              Small commits. Clear messages. Readme first. One improvement at a time.
+              The goal is not noise. The goal is signal.
+            </p>
+            <div class="tags" aria-label="Tags">
+              <span class="tag">Documentation</span>
+              <span class="tag">Iteration</span>
+              <span class="tag">Clarity</span>
+              <span class="tag">Shipping</span>
+            </div>
+          </div>
+
+          <div class="panel reveal">
+            <h2>Now</h2>
+            <p>
+              This page is an experiment in layout, rhythm, and restraint.
+              It stays monochrome and intentionally calm.
+            </p>
+            <div class="tags">
+              <span class="tag">Black and white</span>
+              <span class="tag">Spacing</span>
+              <span class="tag">Minimal UI</span>
+            </div>
+          </div>
+        </div>
       </header>
 
-      <section>
-        <h2>Focus</h2>
-        <ul>
-          <li>Clean repo structures and readable commits</li>
-          <li>Documentation that makes projects understandable quickly</li>
-          <li>Experimenting with workflows and automation</li>
-        </ul>
-      </section>
+      <section id="notes" class="section">
+        <div class="section-title reveal">
+          <h2>Notes</h2>
+          <div class="small">Clean structure. Few elements. Strong hierarchy.</div>
+        </div>
 
-      <section>
-        <h2>What you can expect</h2>
         <div class="grid">
-          <div class="card">
-            <h3>Consistency</h3>
-            <p class="meta">Regular updates and visible progress, no “magic” hidden work.</p>
-          </div>
-          <div class="card">
-            <h3>Clarity</h3>
-            <p class="meta">Readable code and simple explanations, so the repo tells the story.</p>
-          </div>
+          <article class="card reveal">
+            <h3>What this signals</h3>
+            <p>
+              Ability to structure work, keep a repository readable, and make progress visible.
+              Less spectacle. More intent.
+            </p>
+          </article>
+
+          <article class="card reveal">
+            <h3>What happens next</h3>
+            <p>
+              This becomes a hub for repositories, changelogs, and short build notes.
+              Each update should be understandable in under a minute.
+            </p>
+          </article>
+
+          <article class="card reveal">
+            <h3>Design rule</h3>
+            <p>
+              If an effect does not improve comprehension, it does not ship.
+              The page stays fast and calm.
+            </p>
+          </article>
+
+          <article class="card reveal">
+            <h3>Implementation detail</h3>
+            <p>
+              Subtle reveals use IntersectionObserver. No heavy libraries.
+              Motion respects reduced motion preferences.
+            </p>
+          </article>
         </div>
       </section>
 
-      <footer>If it is not documented, it did not happen.</footer>
+      <section id="excerpt" class="section">
+        <div class="section-title reveal">
+          <h2>Excerpt placeholder</h2>
+          <div class="small">Schiller, Die Glocke</div>
+        </div>
+
+        <div style="margin-top: 24px" class="reveal">
+          <blockquote>
+            <p>
+              Fest gemauert in der Erden<br />
+              Steht die Form, aus Lehm gebrannt.<br />
+              Heute soll die Glocke werden.<br />
+              Frisch, Gesellen, seid zur Hand.
+            </p>
+            <div class="quote-meta">Friedrich Schiller, Die Glocke. Placeholder text for layout testing.</div>
+          </blockquote>
+        </div>
+      </section>
+
+      <footer>
+        GitHub Ongoing. Built for clarity, not decoration.
+      </footer>
     </main>
+
+    <script>
+      (function () {
+        const els = document.querySelectorAll(".reveal");
+        if (!("IntersectionObserver" in window)) {
+          els.forEach((el) => el.classList.add("is-in"));
+          return;
+        }
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((e) => {
+              if (e.isIntersecting) e.target.classList.add("is-in");
+            });
+          },
+          { threshold: 0.12 }
+        );
+        els.forEach((el) => io.observe(el));
+      })();
+    </script>
   </body>
 </html>
