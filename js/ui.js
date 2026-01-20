@@ -11,4 +11,3 @@
   window.addEventListener("scroll", update, { passive: true });
   update();
 })();
-
