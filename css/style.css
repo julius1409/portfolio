@@ -1,3 +1,5 @@
+/* css/style.css (REPLACE your current file with this version) */
+
 :root{
   --bg:#ffffff;
   --fg:#0b0b0b;
@@ -9,8 +11,11 @@
   /* Page width defaults */
   --max:980px;
 
-  /* NEW: toolbar width defaults */
+  /* Toolbar width defaults */
   --navmax: var(--max);
+
+  /* Fixed topbar spacer */
+  --topbar-space: 86px;
 }
 
 *{box-sizing:border-box;}
@@ -25,7 +30,7 @@ body{
 /* page sizing */
 body.page-index{
   --max:1180px;     /* index content stays wide */
-  --navmax:980px;   /* NEW: toolbar stays like detail pages */
+  --navmax:980px;   /* toolbar stays like detail pages */
 }
 body.page-detail{
   --max:980px;
@@ -36,23 +41,26 @@ body.page-detail{
 .container{
   max-width:var(--max);
   margin:0 auto;
-  padding:22px 18px 96px;
+  padding: calc(22px + var(--topbar-space)) 18px 96px;
 }
 
-/* topbar (width controlled by --navmax now) */
+/* topbar (fixed + hide/show) */
 .topbar{
-  position:sticky;
-  top:12px;
-  z-index:30;
-  display:flex;
-  justify-content:center;
-  margin:12px 0 18px;
-  padding:0;
+  position: fixed;
+  top: 12px;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  padding: 0 18px;
+  margin: 0;
+  transition: transform 220ms ease, opacity 220ms ease;
+  will-change: transform, opacity;
 }
 .topbar-inner{
   width:100%;
-  max-width:var(--navmax); /* CHANGED: was var(--max) */
-  margin:0 18px;           /* aligns with container padding */
+  max-width:var(--navmax);
   display:flex;
   align-items:center;
   justify-content:space-between;
@@ -63,6 +71,12 @@ body.page-detail{
   backdrop-filter:blur(12px);
   box-shadow:var(--shadow2);
 }
+.topbar.is-hidden{
+  transform: translateY(-160%) !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
 .brand{
   text-decoration:none;
   color:var(--muted);
@@ -303,55 +317,14 @@ body.page-index .card{
   background:rgba(0,0,0,0.06);
 }
 
-@media (prefers-reduced-motion: reduce){
-  html{scroll-behavior:auto;}
-  #sharpen,.card-inner,.hero-media img{transition:none;}
-}
-/* --- TOPBAR: fixed + no overlap + hide/show --- */
-:root { --topbar-space: 86px; } /* reservierter Platz oben */
-
-.container{
-  padding-top: calc(22px + var(--topbar-space));
-}
-
-/* fixed bar */
-.topbar{
-  position: fixed;
-  top: 12px;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-  display: flex;
-  justify-content: center;
-  padding: 0 18px;
-  margin: 0;
-  transition: transform 220ms ease, opacity 220ms ease;
-  will-change: transform, opacity;
-}
-
-.topbar.is-hidden{
-  transform: translateY(-160%) !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
-}
-
-@media (prefers-reduced-motion: reduce){
-  .topbar{ transition: none; }
-}
-/* ADD THIS to css/style.css (global) */
-
-/* ensure centered header on detail pages */
-.page-detail header {
-  text-align: center;
-}
-
 /* About Me modules */
+.page-detail header { text-align: center; }
+
 .about-wrap{
   margin-top: 38px;
   display: grid;
   gap: 18px;
 }
-
 .about-module{
   border-radius: var(--radius);
   background: rgba(0,0,0,0.03);
@@ -359,11 +332,11 @@ body.page-index .card{
   overflow: hidden;
   transition: transform 180ms ease, background 180ms ease;
 }
-
 .about-module:hover{
   transform: translateY(-1px);
   background: rgba(0,0,0,0.035);
 }
+.about-module summary::-webkit-details-marker{ display:none; }
 
 .about-summary{
   list-style: none;
@@ -375,9 +348,6 @@ body.page-index .card{
   gap: 12px;
   align-items: center;
 }
-
-.about-module summary::-webkit-details-marker{ display:none; }
-
 .about-step{
   display: inline-flex;
   align-items: center;
@@ -389,73 +359,28 @@ body.page-index .card{
   color: rgba(11,11,11,0.75);
   font-size: 0.95rem;
 }
-
 .about-title{
   font-size: 1.05rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--fg);
 }
-
 .about-hint{
   color: rgba(11,11,11,0.45);
   font-size: 0.92rem;
   white-space: nowrap;
 }
-
 .about-body{
   padding: 0 18px 18px;
   max-width: 86ch;
   margin: 0 auto;
   text-align: left;
 }
-
 .about-text{
   margin: 0;
   color: var(--muted);
   line-height: 1.95;
 }
-
-.about-list{
-  margin: 16px 0 0;
-  padding-left: 18px;
-  color: var(--muted);
-  line-height: 1.9;
-}
-
-.about-list li{ margin-bottom: 10px; }
-
-.about-chips{
-  margin-top: 16px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.chip{
-  border-radius: 999px;
-  padding: 8px 12px;
-  background: rgba(0,0,0,0.04);
-  color: rgba(11,11,11,0.72);
-  font-size: 0.92rem;
-  transition: transform 160ms ease, background 160ms ease;
-}
-
-.chip:hover{
-  transform: translateY(-1px);
-  background: rgba(0,0,0,0.06);
-}
-
-@media (prefers-reduced-motion: reduce){
-  .about-module, .chip{ transition: none; }
-  .about-module:hover, .chip:hover{ transform: none; }
-}
-/* ADD to css/style.css (no background changes, only formatting) */
-
-/* modules start collapsed:
-   make sure your HTML <details class="about-module"> has NO "open" attribute */
-
-/* text as justified blocks inside modules */
 .about-textblock{
   margin: 0;
   color: var(--muted);
@@ -464,46 +389,69 @@ body.page-index .card{
   text-justify: inter-word;
   hyphens: auto;
 }
-
-/* optional: also justify the bullet section text */
 .about-list{
+  margin: 16px 0 0;
+  padding-left: 18px;
+  color: var(--muted);
+  line-height: 1.9;
   text-align: justify;
   text-justify: inter-word;
   hyphens: auto;
 }
-/* MOBILE: GIF nicht croppen, komplett zeigen */
-@media (pointer: coarse), (max-width: 820px) {
-  .hero-media img {
-    object-fit: contain !important;
-    background: #000; /* falls dein GIF nicht fullscreen ist, wirkt das sauber */
-  }
+.about-list li{ margin-bottom: 10px; }
 
-  /* optional: etwas weniger Höhe, damit es nicht zu dominant wird */
-  .hero-media {
-    height: clamp(180px, 34vh, 320px) !important;
-  }
+.about-chips{
+  margin-top: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
-/* MOBILE: Blur komplett aus */
-@media (pointer: coarse), (max-width: 820px) {
-  #sharpen,
-  #sharpen.scrolling {
-    filter: none !important;
-  }
+.chip{
+  border-radius: 999px;
+  padding: 8px 12px;
+  background: rgba(0,0,0,0.04);
+  color: rgba(11,11,11,0.72);
+  font-size: 0.92rem;
+  transition: transform 160ms ease, background 160ms ease;
+}
+.chip:hover{
+  transform: translateY(-1px);
+  background: rgba(0,0,0,0.06);
+}
 
-  /* falls du irgendwo backdrop-filter nutzt (Topbar) */
-  .topbar-inner {
-    backdrop-filter: none !important;
-  }
-}
-/* MOBILE/TOUCH: Custom cursor deaktivieren */
-@media (pointer: coarse), (max-width: 820px) {
+/* MOBILE (stronger detection): no cursor, no blur, GIF fully visible */
+@media (max-width: 820px), (hover: none), (any-pointer: coarse) {
+  /* cursor off */
   body.custom-cursor,
-  body.custom-cursor * {
-    cursor: auto !important;
+  body.custom-cursor * { cursor: auto !important; }
+  .cursor-dot{ display:none !important; }
+
+  /* blur off (text blur + topbar blur) */
+  #sharpen,
+  #sharpen.scrolling{ filter:none !important; }
+  .topbar-inner{ backdrop-filter:none !important; }
+
+  /* GIF: never crop */
+  .hero-media{
+    height:auto !important;
+    padding:10px 0;
+    background:#000;
+  }
+  .hero-media img{
+    width:100% !important;
+    height:auto !important;
+    max-height:60vh;
+    object-fit:contain !important;
+    transform:none !important;
   }
 
-  .cursor-dot {
-    display: none !important;
-  }
+  .hero-copy{ padding:26px 18px 30px; }
 }
 
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto;}
+  #sharpen,.card-inner,.hero-media img{transition:none;}
+  .topbar{ transition:none; }
+  .about-module, .chip{ transition:none; }
+  .about-module:hover, .chip:hover{ transform:none; }
+}
