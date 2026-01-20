@@ -1,3 +1,4 @@
+<!-- github.html (Gold + Losungen entfernt, Weather tile hinzugefuegt: Hamburg, Nagold, Lemgo) -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -11,286 +12,313 @@
     />
 
     <style>
-      :root {
-        --bg: #ffffff;
-        --fg: #0b0b0b;
-        --muted: rgba(11, 11, 11, 0.66);
-        --muted2: rgba(11, 11, 11, 0.5);
+      :root{
+        --bg:#ffffff;
+        --fg:#0b0b0b;
+        --muted:rgba(11,11,11,0.66);
+        --muted2:rgba(11,11,11,0.5);
 
-        --shadow: 0 18px 60px rgba(0, 0, 0, 0.08);
-        --shadow2: 0 10px 30px rgba(0, 0, 0, 0.06);
+        --shadow:0 18px 60px rgba(0,0,0,0.08);
+        --shadow2:0 10px 30px rgba(0,0,0,0.06);
 
-        --radius: 18px;
-        --max: 980px;
+        --radius:18px;
+        --max:980px;
 
-        --line: rgba(0, 0, 0, 0.08);
-        --soft: rgba(0, 0, 0, 0.03);
+        --line:rgba(0,0,0,0.08);
+        --soft:rgba(0,0,0,0.03);
 
-        /* subtle NATO-olive (transparent) */
-        --olive: rgba(107, 122, 96, 0.14);
-        --oliveLine: rgba(107, 122, 96, 0.28);
+        --olive:rgba(107,122,96,0.14);
+        --oliveLine:rgba(107,122,96,0.28);
 
-        --padX: 18px;
-      }
-
-      * { box-sizing: border-box; }
-      html { scroll-behavior: smooth; }
-      body {
-        margin: 0;
-        background: var(--bg);
-        color: var(--fg);
-        font-family: "Inconsolata", monospace;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
+        --padX:18px;
       }
 
-      .container {
-        max-width: var(--max);
-        margin: 0 auto;
-        padding: 22px var(--padX) 96px;
+      *{box-sizing:border-box;}
+      html{scroll-behavior:smooth;}
+      body{
+        margin:0;
+        background:var(--bg);
+        color:var(--fg);
+        font-family:"Inconsolata", monospace;
+        -webkit-font-smoothing:antialiased;
+        -moz-osx-font-smoothing:grayscale;
       }
 
-      /* topbar */
-      .topbar {
-        position: sticky;
-        top: 12px;
-        z-index: 30;
-        display: flex;
-        justify-content: center;
-        margin: 12px 0 18px;
-        padding: 0 var(--padX);
-      }
-      .topbar-inner {
-        width: 100%;
-        max-width: var(--max);
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 12px;
-        padding: 9px 12px;
-        border-radius: 999px;
-        background: rgba(255, 255, 255, 0.84);
-        backdrop-filter: blur(12px);
-        box-shadow: var(--shadow2);
-      }
-      .brand {
-        text-decoration: none;
-        color: var(--muted);
-        font-size: 0.9rem;
-        white-space: nowrap;
-      }
-      .nav {
-        display: flex;
-        gap: 10px;
-        flex-wrap: wrap;
-        justify-content: flex-end;
-      }
-      .pill {
-        text-decoration: none;
-        color: var(--fg);
-        font-size: 0.9rem;
-        padding: 7px 10px;
-        border-radius: 999px;
-        background: rgba(0, 0, 0, 0.04);
-        transition: transform 160ms ease, background 160ms ease;
-      }
-      .pill:hover {
-        transform: translateY(-1px);
-        background: rgba(0, 0, 0, 0.06);
+      .container{
+        max-width:var(--max);
+        margin:0 auto;
+        padding:22px var(--padX) 96px;
       }
 
-      header {
-        margin-top: 26px;
-        text-align: center;
+      .topbar{
+        position:sticky;
+        top:12px;
+        z-index:30;
+        display:flex;
+        justify-content:center;
+        margin:12px 0 18px;
+        padding:0 var(--padX);
       }
-      .kicker {
-        margin: 0;
-        color: var(--muted);
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
-        font-size: 0.92rem;
+      .topbar-inner{
+        width:100%;
+        max-width:var(--max);
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        gap:12px;
+        padding:9px 12px;
+        border-radius:999px;
+        background:rgba(255,255,255,0.84);
+        backdrop-filter:blur(12px);
+        box-shadow:var(--shadow2);
       }
-      h1 {
-        margin: 14px 0 0;
-        font-size: clamp(2rem, 3.2vw + 1rem, 3rem);
-        letter-spacing: -0.02em;
+      .brand{
+        text-decoration:none;
+        color:var(--muted);
+        font-size:0.9rem;
+        white-space:nowrap;
       }
-      .lead {
-        margin: 18px auto 0;
-        max-width: 82ch;
-        color: var(--muted);
-        line-height: 1.95;
-        font-size: 1.03rem;
+      .nav{
+        display:flex;
+        gap:10px;
+        flex-wrap:wrap;
+        justify-content:flex-end;
       }
-
-      .stack { margin-top: 44px; }
-      .grid {
-        margin-top: 28px;
-        display: grid;
-        gap: 18px;
-        grid-template-columns: 1fr;
+      .pill{
+        text-decoration:none;
+        color:var(--fg);
+        font-size:0.9rem;
+        padding:7px 10px;
+        border-radius:999px;
+        background:rgba(0,0,0,0.04);
+        transition:transform 160ms ease, background 160ms ease;
       }
-      @media (min-width: 900px) {
-        .grid { grid-template-columns: 1.35fr 0.65fr; }
-      }
-
-      .cards {
-        margin-top: 40px;
-        display: grid;
-        gap: 18px;
-        grid-template-columns: 1fr;
-      }
-      @media (min-width: 900px) {
-        .cards { grid-template-columns: repeat(2, 1fr); }
-      }
-
-      .tile {
-        border-radius: var(--radius);
-        background: #fff;
-        box-shadow: var(--shadow);
-        overflow: hidden;
-      }
-      .tile.olive {
-        background: linear-gradient(180deg, var(--olive), rgba(255,255,255,0.92));
-        outline: 1px solid var(--oliveLine);
-        outline-offset: -1px;
+      .pill:hover{
+        transform:translateY(-1px);
+        background:rgba(0,0,0,0.06);
       }
 
-      .tile-head { padding: 18px 18px 14px; text-align: center; }
-      .tile-title {
-        margin: 0;
-        font-size: 1.05rem;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
+      header{
+        margin-top:26px;
+        text-align:center;
       }
-      .tile-sub {
-        margin: 10px 0 0;
-        color: var(--muted);
-        line-height: 1.75;
-        max-width: 78ch;
-        margin-left: auto;
-        margin-right: auto;
+      .kicker{
+        margin:0;
+        color:var(--muted);
+        letter-spacing:0.14em;
+        text-transform:uppercase;
+        font-size:0.92rem;
       }
-      .rule { height: 1px; background: var(--line); margin: 0 18px 18px; }
-      .tile-body { padding: 0 18px 18px; }
-
-      .row {
-        display: flex;
-        gap: 10px;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: center;
+      h1{
+        margin:14px 0 0;
+        font-size:clamp(2rem,3.2vw + 1rem,3rem);
+        letter-spacing:-0.02em;
+      }
+      .lead{
+        margin:18px auto 0;
+        max-width:82ch;
+        color:var(--muted);
+        line-height:1.95;
+        font-size:1.03rem;
       }
 
-      .btn {
-        appearance: none;
-        border: 0;
-        background: rgba(0, 0, 0, 0.04);
-        color: var(--fg);
-        border-radius: 999px;
-        padding: 10px 14px;
-        font-family: inherit;
-        font-size: 0.95rem;
-        cursor: pointer;
-        transition: transform 160ms ease, background 160ms ease;
+      .stack{ margin-top:44px; }
+      .grid{
+        margin-top:28px;
+        display:grid;
+        gap:18px;
+        grid-template-columns:1fr;
       }
-      .btn:hover { transform: translateY(-1px); background: rgba(0, 0, 0, 0.06); }
-      .btn:active { transform: translateY(0); }
-      .btn.ghost { background: transparent; outline: 1px solid var(--line); }
-      .btn.ghost:hover { background: rgba(0,0,0,0.03); }
-
-      .pillbox {
-        display: inline-flex;
-        gap: 10px;
-        align-items: center;
-        border-radius: 999px;
-        background: rgba(0,0,0,0.03);
-        padding: 10px 12px;
-        color: var(--muted2);
+      @media (min-width:900px){
+        .grid{ grid-template-columns:1.35fr 0.65fr; }
       }
 
-      .range { width: min(640px, 100%); }
-
-      .poem {
-        margin-top: 18px;
-        border-radius: calc(var(--radius) - 4px);
-        background: rgba(0, 0, 0, 0.03);
-        padding: 18px;
-        box-shadow: var(--shadow2);
-        text-align: center;
+      .cards{
+        margin-top:40px;
+        display:grid;
+        gap:18px;
+        grid-template-columns:1fr;
       }
-      .poem-meta {
-        display: flex;
-        justify-content: space-between;
-        gap: 12px;
-        flex-wrap: wrap;
-        color: var(--muted2);
-        font-size: 0.92rem;
-        margin-bottom: 12px;
-      }
-      .poem-text {
-        margin: 0;
-        white-space: pre-wrap;
-        line-height: 1.95;
-        font-size: 1.02rem;
-        text-align: center;
+      @media (min-width:900px){
+        .cards{ grid-template-columns:repeat(2, 1fr); }
       }
 
-      /* compact dot window so it stays elegant even with many stanzas */
-      .dots {
-        margin-top: 14px;
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 6px;
+      .tile{
+        border-radius:var(--radius);
+        background:#fff;
+        box-shadow:var(--shadow);
+        overflow:hidden;
       }
-      .dot {
-        width: 8px;
-        height: 8px;
-        border-radius: 999px;
-        background: rgba(0,0,0,0.18);
-        opacity: 0.55;
-      }
-      .dot.on { background: rgba(0,0,0,0.82); opacity: 1; }
-
-      .note {
-        border-radius: var(--radius);
-        background: rgba(0, 0, 0, 0.03);
-        padding: 16px;
-        box-shadow: var(--shadow2);
-        text-align: center;
-      }
-      .note h3 { margin: 0; font-size: 1.02rem; }
-      .note p { margin: 12px 0 0; color: var(--muted); line-height: 1.85; }
-
-      .losung {
-        border-radius: calc(var(--radius) - 4px);
-        background: rgba(0, 0, 0, 0.03);
-        padding: 18px;
-        box-shadow: var(--shadow2);
-        text-align: center;
-      }
-      .losung .date { color: var(--muted2); font-size: 0.92rem; margin: 0 0 12px; }
-      .losung .label {
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        font-size: 0.9rem;
-        color: var(--muted2);
-        margin: 0;
-      }
-      .losung .verse { margin: 10px 0 0; line-height: 1.9; font-size: 1.02rem; }
-      .losung .ref { margin: 8px 0 0; color: var(--muted); font-size: 0.95rem; }
-
-      footer {
-        margin-top: 70px;
-        text-align: center;
-        color: rgba(11, 11, 11, 0.55);
-        font-size: 0.92rem;
+      .tile.olive{
+        background:linear-gradient(180deg, var(--olive), rgba(255,255,255,0.92));
+        outline:1px solid var(--oliveLine);
+        outline-offset:-1px;
       }
 
-      @media (prefers-reduced-motion: reduce) {
-        html { scroll-behavior: auto; }
-        .pill, .btn { transition: none; }
+      .tile-head{
+        padding:18px 18px 14px;
+        text-align:center;
+      }
+      .tile-title{
+        margin:0;
+        font-size:1.05rem;
+        letter-spacing:0.12em;
+        text-transform:uppercase;
+      }
+      .tile-sub{
+        margin:10px 0 0;
+        color:var(--muted);
+        line-height:1.75;
+        max-width:78ch;
+        margin-left:auto;
+        margin-right:auto;
+      }
+      .rule{
+        height:1px;
+        background:var(--line);
+        margin:0 18px 18px;
+      }
+      .tile-body{ padding:0 18px 18px; }
+
+      .row{
+        display:flex;
+        gap:10px;
+        flex-wrap:wrap;
+        align-items:center;
+        justify-content:center;
+      }
+
+      .btn{
+        appearance:none;
+        border:0;
+        background:rgba(0,0,0,0.04);
+        color:var(--fg);
+        border-radius:999px;
+        padding:10px 14px;
+        font-family:inherit;
+        font-size:0.95rem;
+        cursor:pointer;
+        transition:transform 160ms ease, background 160ms ease;
+      }
+      .btn:hover{ transform:translateY(-1px); background:rgba(0,0,0,0.06); }
+      .btn:active{ transform:translateY(0); }
+      .btn.ghost{ background:transparent; outline:1px solid var(--line); }
+      .btn.ghost:hover{ background:rgba(0,0,0,0.03); }
+
+      .pillbox{
+        display:inline-flex;
+        gap:10px;
+        align-items:center;
+        border-radius:999px;
+        background:rgba(0,0,0,0.03);
+        padding:10px 12px;
+        color:var(--muted2);
+      }
+
+      .range{ width:min(640px, 100%); }
+
+      .poem{
+        margin-top:18px;
+        border-radius:calc(var(--radius) - 4px);
+        background:rgba(0,0,0,0.03);
+        padding:18px;
+        box-shadow:var(--shadow2);
+        text-align:center;
+      }
+      .poem-meta{
+        display:flex;
+        justify-content:space-between;
+        gap:12px;
+        flex-wrap:wrap;
+        color:var(--muted2);
+        font-size:0.92rem;
+        margin-bottom:12px;
+      }
+      .poem-text{
+        margin:0;
+        white-space:pre-wrap;
+        line-height:1.95;
+        font-size:1.02rem;
+        text-align:center;
+      }
+
+      .dots{
+        margin-top:14px;
+        display:flex;
+        justify-content:center;
+        flex-wrap:wrap;
+        gap:6px;
+      }
+      .dot{
+        width:8px;
+        height:8px;
+        border-radius:999px;
+        background:rgba(0,0,0,0.18);
+        opacity:0.55;
+      }
+      .dot.on{ background:rgba(0,0,0,0.82); opacity:1; }
+
+      .note{
+        border-radius:var(--radius);
+        background:rgba(0,0,0,0.03);
+        padding:16px;
+        box-shadow:var(--shadow2);
+        text-align:center;
+      }
+      .note h3{ margin:0; font-size:1.02rem; }
+      .note p{ margin:12px 0 0; color:var(--muted); line-height:1.85; }
+
+      /* weather */
+      .weather-grid{
+        display:grid;
+        gap:14px;
+        grid-template-columns:1fr;
+        margin-top:10px;
+      }
+      @media (min-width:900px){
+        .weather-grid{ grid-template-columns:repeat(3, 1fr); }
+      }
+      .wx{
+        border-radius:calc(var(--radius) - 4px);
+        background:rgba(0,0,0,0.03);
+        padding:16px;
+        box-shadow:var(--shadow2);
+        text-align:center;
+      }
+      .wx .city{
+        margin:0;
+        letter-spacing:0.12em;
+        text-transform:uppercase;
+        font-size:0.92rem;
+        color:var(--muted2);
+      }
+      .wx .temp{
+        margin:10px 0 0;
+        font-size:2.0rem;
+        letter-spacing:-0.02em;
+      }
+      .wx .meta{
+        margin:8px 0 0;
+        color:var(--muted);
+        line-height:1.7;
+        font-size:0.95rem;
+      }
+      .wx .small{
+        margin:10px 0 0;
+        color:var(--muted2);
+        font-size:0.9rem;
+      }
+
+      footer{
+        margin-top:70px;
+        text-align:center;
+        color:rgba(11,11,11,0.55);
+        font-size:0.92rem;
+      }
+
+      @media (prefers-reduced-motion: reduce){
+        html{ scroll-behavior:auto; }
+        .pill, .btn{ transition:none; }
       }
     </style>
   </head>
@@ -310,7 +338,7 @@
         <p class="kicker">Project</p>
         <h1>GitHub Ongoing</h1>
         <p class="lead">
-          Clean UI, real modules. A poem engine that looks like a product tile, plus a daily watchword tile.
+          Clean UI, real modules. A poem engine plus a weather tile for Hamburg, Nagold, and Lemgo.
         </p>
       </header>
 
@@ -319,7 +347,7 @@
           <div class="tile-head">
             <h2 class="tile-title">Die Glocke</h2>
             <p class="tile-sub">
-              Full text loaded from assets, split into stanzas by blank lines. Slider, random, copy.
+              Loaded from assets, split into stanzas by blank lines. Slider, random, copy.
             </p>
           </div>
 
@@ -376,54 +404,59 @@
         </aside>
       </section>
 
+      <!-- Weather tile -->
       <section class="cards stack">
         <article class="tile olive">
           <div class="tile-head">
-            <h2 class="tile-title">Gold Desk</h2>
+            <h2 class="tile-title">Weather</h2>
             <p class="tile-sub">
-              Leave this tile as is or remove it. Not touched in this revision.
+              Live forecast snapshot (next hours) for Hamburg, Nagold, and Lemgo.
             </p>
           </div>
           <div class="rule"></div>
           <div class="tile-body">
-            <div class="note">
-              <h3>Optional</h3>
-              <p>
-                Keep your gold widgets from your previous version here. This change request was poem and watchword only.
-              </p>
+            <div class="row" style="margin-bottom: 14px;">
+              <button class="btn" type="button" id="wxRefresh">Refresh</button>
+              <span class="pillbox" id="wxStatus">Loading ...</span>
+            </div>
+
+            <div class="weather-grid">
+              <div class="wx" id="wxHamburg">
+                <p class="city">Hamburg</p>
+                <div class="temp" data-temp>--°</div>
+                <div class="meta" data-meta>—</div>
+                <div class="small" data-small>—</div>
+              </div>
+
+              <div class="wx" id="wxNagold">
+                <p class="city">Nagold</p>
+                <div class="temp" data-temp>--°</div>
+                <div class="meta" data-meta>—</div>
+                <div class="small" data-small>—</div>
+              </div>
+
+              <div class="wx" id="wxLemgo">
+                <p class="city">Lemgo</p>
+                <div class="temp" data-temp>--°</div>
+                <div class="meta" data-meta>—</div>
+                <div class="small" data-small>—</div>
+              </div>
             </div>
           </div>
         </article>
 
         <article class="tile">
           <div class="tile-head">
-            <h2 class="tile-title">Tageslosung</h2>
+            <h2 class="tile-title">Next</h2>
             <p class="tile-sub">
-              Loaded from losungen.app API. If it fails, you see a calm fallback message.
+              Later: each project gets its own accent color. This is the first subtle test (olive).
             </p>
           </div>
-
           <div class="rule"></div>
-
           <div class="tile-body">
-            <div class="row" style="margin-bottom: 14px;">
-              <button class="btn" type="button" id="losungRefresh">Refresh</button>
-            </div>
-
-            <div class="losung" id="losungBox" aria-live="polite">
-              <p class="date" id="losungDate">Loading ...</p>
-
-              <div style="margin-top: 10px;">
-                <p class="label">Losung</p>
-                <p class="verse" id="losungText">—</p>
-                <p class="ref" id="losungRef"></p>
-              </div>
-
-              <div style="margin-top: 18px;">
-                <p class="label">Lehrtext</p>
-                <p class="verse" id="lehrText">—</p>
-                <p class="ref" id="lehrRef"></p>
-              </div>
+            <div class="note">
+              <h3>Module idea</h3>
+              <p>Add a small “Now building” feed that reads from a local JSON file in the repo.</p>
             </div>
           </div>
         </article>
@@ -433,10 +466,7 @@
     </main>
 
     <script>
-      // -----------------------------
-      // Poem engine: load from assets and split into stanzas
-      // Rule: one or more blank lines = new stanza
-      // -----------------------------
+      // Poem engine (expects assets/die-glocke.txt)
       (function () {
         const range = document.getElementById("stanzaRange");
         const text = document.getElementById("poemText");
@@ -449,7 +479,7 @@
         const randomBtn = document.getElementById("randomBtn");
         const copyBtn = document.getElementById("copyBtn");
 
-        const STOR_KEY = "github_glocke_stanza_v2";
+        const STOR_KEY = "github_glocke_stanza_v3";
         let stanzas = [];
         let idx = 0;
 
@@ -498,7 +528,6 @@
             if (!res.ok) throw new Error("poem file missing");
             const raw = (await res.text()).replace(/\r\n/g, "\n").trim();
 
-            // split by blank lines
             stanzas = raw
               .split(/\n{2,}/g)
               .map((s) => s.trim())
@@ -531,65 +560,106 @@
         });
         copyBtn.addEventListener("click", async () => {
           if (!stanzas.length) return;
-          try {
-            await navigator.clipboard.writeText(stanzas[idx]);
-          } catch {}
+          try { await navigator.clipboard.writeText(stanzas[idx]); } catch {}
         });
 
         loadPoem();
       })();
 
-      // -----------------------------
-      // Tageslosung: correct endpoint
-      // -----------------------------
+      // Weather tile using Open-Meteo (no key)
       (function () {
-        const dateEl = document.getElementById("losungDate");
-        const losungTextEl = document.getElementById("losungText");
-        const losungRefEl = document.getElementById("losungRef");
-        const lehrTextEl = document.getElementById("lehrText");
-        const lehrRefEl = document.getElementById("lehrRef");
-        const btn = document.getElementById("losungRefresh");
+        const statusEl = document.getElementById("wxStatus");
+        const btn = document.getElementById("wxRefresh");
 
-        function pick(obj, keys) {
-          for (const k of keys) {
-            if (obj && obj[k] != null && String(obj[k]).trim() !== "") return obj[k];
-          }
-          return "";
+        const cities = [
+          { id: "wxHamburg", name: "Hamburg", lat: 53.5511, lon: 9.9937 },
+          { id: "wxNagold", name: "Nagold", lat: 48.5510, lon: 8.7230 },
+          { id: "wxLemgo", name: "Lemgo", lat: 52.0284, lon: 8.9010 },
+        ];
+
+        function setBox(el, temp, meta, small) {
+          el.querySelector("[data-temp]").textContent = temp;
+          el.querySelector("[data-meta]").textContent = meta;
+          el.querySelector("[data-small]").textContent = small;
         }
 
-        async function load() {
-          dateEl.textContent = "Loading ...";
-          losungTextEl.textContent = "—";
-          lehrTextEl.textContent = "—";
-          losungRefEl.textContent = "";
-          lehrRefEl.textContent = "";
+        function wxCodeToText(code) {
+          const map = {
+            0: "Clear",
+            1: "Mainly clear",
+            2: "Partly cloudy",
+            3: "Overcast",
+            45: "Fog",
+            48: "Depositing rime fog",
+            51: "Light drizzle",
+            53: "Drizzle",
+            55: "Dense drizzle",
+            61: "Light rain",
+            63: "Rain",
+            65: "Heavy rain",
+            71: "Light snow",
+            73: "Snow",
+            75: "Heavy snow",
+            80: "Rain showers",
+            81: "Rain showers",
+            82: "Heavy showers",
+            95: "Thunderstorm",
+            96: "Thunderstorm w/ hail",
+            99: "Thunderstorm w/ hail",
+          };
+          return map[code] || `Weather code ${code}`;
+        }
 
+        async function loadCity(c) {
+          const box = document.getElementById(c.id);
+          setBox(box, "--°", "Loading ...", "—");
+
+          const url =
+            "https://api.open-meteo.com/v1/forecast" +
+            `?latitude=${encodeURIComponent(c.lat)}` +
+            `&longitude=${encodeURIComponent(c.lon)}` +
+            "&current=temperature_2m,weather_code,wind_speed_10m" +
+            "&hourly=temperature_2m,weather_code" +
+            "&forecast_days=2" +
+            "&timezone=Europe%2FBerlin";
+
+          const res = await fetch(url, { cache: "no-store" });
+          if (!res.ok) throw new Error("weather fetch failed");
+          const data = await res.json();
+
+          const t = data?.current?.temperature_2m;
+          const code = data?.current?.weather_code;
+          const wind = data?.current?.wind_speed_10m;
+
+          const temp = (typeof t === "number") ? `${Math.round(t)}°` : "--°";
+          const meta = `${wxCodeToText(code)} · Wind ${Math.round(wind ?? 0)} km/h`;
+
+          // show next 6h mini summary (avg)
+          const nowIdx = 0;
+          const nextTemps = (data?.hourly?.temperature_2m || []).slice(nowIdx, nowIdx + 6);
+          const avg =
+            nextTemps.length
+              ? Math.round(nextTemps.reduce((a, b) => a + b, 0) / nextTemps.length)
+              : null;
+
+          const small = avg != null ? `Next 6h avg: ${avg}°` : "—";
+
+          setBox(box, temp, meta, small);
+        }
+
+        async function loadAll() {
+          statusEl.textContent = "Loading ...";
           try {
-            const url = "https://api.losungen.app/v1/watchword/german/today.json";
-            const res = await fetch(url, { cache: "no-store" });
-            if (!res.ok) throw new Error("bad response");
-            const data = await res.json();
-
-            const date = pick(data, ["Datum", "datum", "date"]);
-            const losText = pick(data, ["Losungstext", "losungstext", "LosungText"]);
-            const losRef = pick(data, ["Losungsvers", "losungsvers", "LosungVers"]);
-            const lehText = pick(data, ["Lehrtext", "lehrtext", "LehrText"]);
-            const lehRef = pick(data, ["Lehrtextvers", "lehrtextvers", "Lehrvers", "lehrvers"]);
-
-            dateEl.textContent = date ? String(date) : "Today";
-            losungTextEl.textContent = losText ? String(losText) : "No data";
-            losungRefEl.textContent = losRef ? String(losRef) : "";
-            lehrTextEl.textContent = lehText ? String(lehText) : "No data";
-            lehrRefEl.textContent = lehRef ? String(lehRef) : "";
-          } catch (e) {
-            dateEl.textContent = "Could not load (check connection)";
-            losungTextEl.textContent = "API endpoint failed.";
-            lehrTextEl.textContent = "Try again with Refresh.";
+            await Promise.all(cities.map(loadCity));
+            const ts = new Date();
+            statusEl.textContent = `Updated ${ts.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}`;
+          } catch {
+            statusEl.textContent = "Failed (check connection)";
           }
         }
 
-        btn.addEventListener("click", load);
-        load();
+        btn.addEventListener("click", loadAll);
+        loadAll();
       })();
     </script>
   </body>
