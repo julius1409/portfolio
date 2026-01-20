@@ -471,4 +471,39 @@ body.page-index .card{
   text-justify: inter-word;
   hyphens: auto;
 }
+/* MOBILE: GIF nicht croppen, komplett zeigen */
+@media (pointer: coarse), (max-width: 820px) {
+  .hero-media img {
+    object-fit: contain !important;
+    background: #000; /* falls dein GIF nicht fullscreen ist, wirkt das sauber */
+  }
+
+  /* optional: etwas weniger Höhe, damit es nicht zu dominant wird */
+  .hero-media {
+    height: clamp(180px, 34vh, 320px) !important;
+  }
+}
+/* MOBILE: Blur komplett aus */
+@media (pointer: coarse), (max-width: 820px) {
+  #sharpen,
+  #sharpen.scrolling {
+    filter: none !important;
+  }
+
+  /* falls du irgendwo backdrop-filter nutzt (Topbar) */
+  .topbar-inner {
+    backdrop-filter: none !important;
+  }
+}
+/* MOBILE/TOUCH: Custom cursor deaktivieren */
+@media (pointer: coarse), (max-width: 820px) {
+  body.custom-cursor,
+  body.custom-cursor * {
+    cursor: auto !important;
+  }
+
+  .cursor-dot {
+    display: none !important;
+  }
+}
 
