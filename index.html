@@ -1,3 +1,4 @@
+
 <!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
@@ -13,6 +14,17 @@
 
   <body class="page-index custom-cursor">
     <div class="cursor-dot" aria-hidden="true"></div>
+
+    <div class="topbar">
+      <div class="topbar-inner">
+        <a class="brand" href="#top">Julius</a>
+        <nav class="nav">
+          <a class="pill" href="#about">About</a>
+          <a class="pill" href="#projects">Projects</a>
+          <a class="pill" href="#contact">Contact</a>
+        </nav>
+      </div>
+    </div>
 
     <main id="top" class="container">
       <div id="sharpen">
@@ -269,3 +281,20 @@
     </script>
   </body>
 </html>
+(function () {
+  const body = document.body;
+  const mq = window.matchMedia("(min-width: 1020px)");
+
+  function update() {
+    if (!mq.matches) {
+      body.classList.remove("nav-side");
+      return;
+    }
+    const y = window.scrollY || document.documentElement.scrollTop || 0;
+    body.classList.toggle("nav-side", y > 180);
+  }
+
+  update();
+  window.addEventListener("scroll", update, { passive: true });
+  window.addEventListener("resize", update);
+})();
