@@ -1,18 +1,33 @@
+// js/typewriter.js
 (() => {
-  const el = document.getElementById("tw");
-  if (!el) return;
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  const full = el.textContent.trim();
-  el.textContent = "";
+  // Elemente: alles mit data-tw und optional data-tw-speed / data-tw-delay
+  const nodes = Array.from(document.querySelectorAll("[data-tw]"));
+  if (!nodes.length || reduceMotion) return;
 
-  let i = 0;
-  const speed = 22; // ms per char
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
-  const tick = () => {
-    i++;
-    el.textContent = full.slice(0, i);
-    if (i < full.length) setTimeout(tick, speed);
-  };
+  async function typeOne(el) {
+    const full = el.textContent;
+    el.dataset.twFull = full;
+    el.textContent = "";
 
-  setTimeout(tick, 180);
+    const speed = Number(el.getAttribute("data-tw-speed") || "14"); // ms/char
+    const delay = Number(el.getAttribute("data-tw-delay") || "0");
+    const cursor = el.getAttribute("data-tw-cursor") === "1";
+
+    if (delay) await sleep(delay);
+
+    for (let i = 1; i <= full.length; i++) {
+      el.textContent = full.slice(0, i) + (cursor ? "▍" : "");
+      await sleep(speed);
+    }
+    el.textContent = full; // Cursor am Ende entfernen
+  }
+
+  // Sequenziell tippen (wirkt hochwertiger als alles gleichzeitig)
+  (async () => {
+    for (const el of nodes) await typeOne(el);
+  })();
 })();
