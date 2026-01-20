@@ -307,4 +307,35 @@ body.page-index .card{
   html{scroll-behavior:auto;}
   #sharpen,.card-inner,.hero-media img{transition:none;}
 }
+/* --- TOPBAR: fixed + no overlap + hide/show --- */
+:root { --topbar-space: 86px; } /* reservierter Platz oben */
+
+.container{
+  padding-top: calc(22px + var(--topbar-space));
+}
+
+/* fixed bar */
+.topbar{
+  position: fixed;
+  top: 12px;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  padding: 0 18px;
+  margin: 0;
+  transition: transform 220ms ease, opacity 220ms ease;
+  will-change: transform, opacity;
+}
+
+.topbar.is-hidden{
+  transform: translateY(-160%) !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+@media (prefers-reduced-motion: reduce){
+  .topbar{ transition: none; }
+}
 
