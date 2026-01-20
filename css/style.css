@@ -338,3 +338,137 @@ body.page-index .card{
 @media (prefers-reduced-motion: reduce){
   .topbar{ transition: none; }
 }
+/* ADD THIS to css/style.css (global) */
+
+/* ensure centered header on detail pages */
+.page-detail header {
+  text-align: center;
+}
+
+/* About Me modules */
+.about-wrap{
+  margin-top: 38px;
+  display: grid;
+  gap: 18px;
+}
+
+.about-module{
+  border-radius: var(--radius);
+  background: rgba(0,0,0,0.03);
+  box-shadow: var(--shadow2);
+  overflow: hidden;
+  transition: transform 180ms ease, background 180ms ease;
+}
+
+.about-module:hover{
+  transform: translateY(-1px);
+  background: rgba(0,0,0,0.035);
+}
+
+.about-summary{
+  list-style: none;
+  cursor: pointer;
+  user-select: none;
+  padding: 18px 18px 14px;
+  display: grid;
+  grid-template-columns: 44px 1fr auto;
+  gap: 12px;
+  align-items: center;
+}
+
+.about-module summary::-webkit-details-marker{ display:none; }
+
+.about-step{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 999px;
+  background: rgba(0,0,0,0.06);
+  color: rgba(11,11,11,0.75);
+  font-size: 0.95rem;
+}
+
+.about-title{
+  font-size: 1.05rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fg);
+}
+
+.about-hint{
+  color: rgba(11,11,11,0.45);
+  font-size: 0.92rem;
+  white-space: nowrap;
+}
+
+.about-body{
+  padding: 0 18px 18px;
+  max-width: 86ch;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.about-text{
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.95;
+}
+
+.about-list{
+  margin: 16px 0 0;
+  padding-left: 18px;
+  color: var(--muted);
+  line-height: 1.9;
+}
+
+.about-list li{ margin-bottom: 10px; }
+
+.about-chips{
+  margin-top: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.chip{
+  border-radius: 999px;
+  padding: 8px 12px;
+  background: rgba(0,0,0,0.04);
+  color: rgba(11,11,11,0.72);
+  font-size: 0.92rem;
+  transition: transform 160ms ease, background 160ms ease;
+}
+
+.chip:hover{
+  transform: translateY(-1px);
+  background: rgba(0,0,0,0.06);
+}
+
+@media (prefers-reduced-motion: reduce){
+  .about-module, .chip{ transition: none; }
+  .about-module:hover, .chip:hover{ transform: none; }
+}
+/* ADD to css/style.css (no background changes, only formatting) */
+
+/* modules start collapsed:
+   make sure your HTML <details class="about-module"> has NO "open" attribute */
+
+/* text as justified blocks inside modules */
+.about-textblock{
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.95;
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+}
+
+/* optional: also justify the bullet section text */
+.about-list{
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+}
+
