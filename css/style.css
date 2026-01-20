@@ -307,13 +307,4 @@ body.page-index .card{
   html{scroll-behavior:auto;}
   #sharpen,.card-inner,.hero-media img{transition:none;}
 }
-.topbar{
-  transition: transform 220ms ease, opacity 220ms ease;
-  will-change: transform, opacity;
-}
-.topbar.is-hidden{
-  transform: translateY(-140%);
-  opacity: 0;
-  pointer-events: none;
-}
 
