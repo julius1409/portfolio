@@ -10,6 +10,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="css/style.css" />
     <script defer src="js/ui.js"></script>
+    <script>
+  if (sessionStorage.getItem("portfolio_unlocked") !== "1") {
+    window.location.replace("gate.html");
+  }
+</script>
   </head>
 
   <body class="page-index custom-cursor">
@@ -37,7 +42,7 @@
             <p class="kicker">Learning portfolio</p>
             <h1>Julius (last name still loading)</h1>
             <p class="lead">
-              Six projects, each representing a workplace or a chapter. Clean, fast, and built as a learning project.
+              Dear Visitor, welcome to my little online portfolio, whereas you find different projects (of wich this website really is one itself), each representing a workplace or a chapter. Please note that this website has been build from scratch, and some errors might occur.
             </p>
           </div>
         </section>
@@ -170,12 +175,12 @@
               </article>
             </a>
 
-            <a class="card-link" href="aboutme.html" aria-label="About Me project page">
+            <a class="card-link" href="aboutme.html" aria-label="Open About Me project page">
               <article class="card" data-flip>
                 <div class="card-inner">
                   <div class="side front">
-                    <h3 class="title">Private Life</h3>
-                    <p class="subtitle">Habits, balance, curiosity. Energy over time.</p>
+                    <h3 class="title">About me</h3>
+                    <p class="subtitle">Skills and Capabilities, Objective and About Me</p>
                     <div class="hint">Click to flip. Human mode.</div>
                   </div>
                   <div class="side back">
