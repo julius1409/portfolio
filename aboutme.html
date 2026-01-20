@@ -6,8 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>About Me | Julius</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="css/style.css" />
+
     <script defer src="js/typewriter.js"></script>
   </head>
 
@@ -22,36 +26,103 @@
     </div>
 
     <main class="container">
-      <header>
-        <p class="kicker">Project</p>
-        <h1 id="tw">Private Life</h1>
-        <p class="lead">The invisible project that makes the visible ones possible.</p>
+      <header class="about-header">
+        <h1 id="tw">About Me</h1>
+        <p class="kicker">Detailed view</p>
+        <p class="lead">
+        <p style="text-align: center;">Skills, direction, and what might differ me from others.</p>
+        </p>
       </header>
 
-      <section>
-        <h2>Focus</h2>
-        <ul>
-          <li>Consistency habits that compound</li>
-          <li>Balancing work, health, and long term energy</li>
-          <li>Curiosity outside of work</li>
-        </ul>
-      </section>
+      <!-- aboutme.html (only the module parts changed) -->
+<section class="about-wrap" aria-label="About me content">
+  <!-- Skills (collapsed by default: no "open") -->
+  <details class="about-module">
+    <summary class="about-summary">
+      <span class="about-step">01</span>
+      <span class="about-title">Skills and capabilities</span>
+      <span class="about-hint">Click to open</span>
+    </summary>
+    <div class="about-body">
+      <p class="about-textblock">
+        Native-level proficiency in German and English (C2), with basic Spanish (A2). Strong IT and productivity skills,
+        particularly in Excel (including VBA, PivotTables, and data visualisation), as well as Word (structured formatting to academic standards),
+        PowerPoint, Microsoft Forms, SISTRIX, Microsoft Teams and Outlook, and Google Workspace. Confident use of AI-enabled tools such as ChatGPT and
+        Midjourney, especially for generating and applying JavaScript, VBA, and HTML. High physical and mental resilience, evidenced by military service
+        as a squad leader in the German Army Mountain Infantry (current rank held OR-4) in Mittenwald, Germany.
+      </p>
 
-      <section>
-        <h2>How I think about it</h2>
-        <div class="grid">
-          <div class="card">
-            <h3>Energy</h3>
-            <p class="meta">Protect the baseline. Everything else stacks on top.</p>
-          </div>
-          <div class="card">
-            <h3>Curiosity</h3>
-            <p class="meta">If learning feels heavy, the system is wrong.</p>
-          </div>
-        </div>
-      </section>
+      <div class="about-chips" aria-label="Skill highlights">
+        <span class="chip">German + English (C2)</span>
+        <span class="chip">Spanish (A2)</span>
+        <span class="chip">Excel (VBA, PivotTables)</span>
+        <span class="chip">Word (academic formatting)</span>
+        <span class="chip">Shopware 6</span>
+        <span class="chip">PowerPoint</span>
+        <span class="chip">Microsoft Forms</span>
+        <span class="chip">SISTRIX</span>
+        <span class="chip">Teams + Outlook</span>
+        <span class="chip">Google Workspace</span>
+        <span class="chip">ChatGPT + Midjourney</span>
+        <span class="chip">JavaScript + VBA + HTML</span>
+        <span class="chip">Military service</span>
+      </div>
+    </div>
+  </details>
 
-      <footer>Turns out you are the platform.</footer>
+  <!-- Objective -->
+  <details class="about-module">
+    <summary class="about-summary">
+      <span class="about-step">02</span>
+      <span class="about-title">Objective</span>
+      <span class="about-hint">Click to open</span>
+    </summary>
+    <div class="about-body">
+      <p class="about-textblock">
+        I am a student at TEXOVERSUM LDT with an international and historical academic background (International Baccalaureate; History with a focus on Modern History at the University of Vienna)
+        and practical experience in brand communication, data analysis, e-commerce content management (with a focus on SEO and webshop optimisation),
+        and organisational process improvement (benchmarking, cross-selling analysis, and assortment adjustments). My goal is to join a demanding, stimulating environment
+        where I can apply my strengths while deliberately developing my weaker areas. I am driven by breaking complex challenges down to their essentials,
+        analysing numbers, turning insights into clear actions, and understanding how my decisions influence outcomes, both positively and negatively.
+        I enjoy working with people from different cultures and value being challenged by perspectives that differ from my own.
+      </p>
+
+      <ul class="about-list">
+        <li>Student at TEXOVERSUM LDT with international and historical background;</li>
+        <li>Experience: brand communication, data analysis, e-commerce content (SEO, webshop optimisation);</li>
+        <li>Process improvement: benchmarking, cross-selling analysis, assortment adjustments;</li>
+        <li>Strength: breaking down complex problems into actionable parts;</li>
+        <li>Motivation: linking analysis to consequences and measurable outcomes;</li>
+        <li>Team fit: enjoys multicultural collaboration and being challenged.</li>
+      </ul>
+    </div>
+  </details>
+
+  <!-- About me -->
+  <details class="about-module">
+    <summary class="about-summary">
+      <span class="about-step">03</span>
+      <span class="about-title">About me</span>
+      <span class="about-hint">Click to open</span>
+    </summary>
+    <div class="about-body">
+      <p class="about-textblock">
+        Confident and adaptable across different social settings, I enjoy connecting people and taking initiative.
+        I actively contribute to student life at TEXOVERSUM LDT through my membership in the student association Duchesse e.V.
+      </p>
+
+      <div class="about-chips" aria-label="Personal highlights">
+        <span class="chip">Confident presence</span>
+        <span class="chip">Cross-context adaptable</span>
+        <span class="chip">outgoing personality</span>
+        <span class="chip">if possible, outdoors</span>
+        <span class="chip">Duchesse e.V.</span>
+      </div>
+    </div>
+  </details>
+</section>
+
+      <footer>Thank you for reading.</footer>
     </main>
   </body>
 </html>
