@@ -307,3 +307,18 @@ body.page-index .card{
   html{scroll-behavior:auto;}
   #sharpen,.card-inner,.hero-media img{transition:none;}
 }
+/* Topbar auto-hide on scroll, show again when at top */
+.topbar {
+  transition: transform 220ms ease, opacity 220ms ease;
+  will-change: transform, opacity;
+}
+
+.topbar.is-hidden {
+  transform: translateY(-140%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .topbar { transition: none; }
+}
